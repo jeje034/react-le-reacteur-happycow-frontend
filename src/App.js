@@ -1,20 +1,12 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./containers/Home/Home";
+import Header from "./components/Header/Header";
 
 function App() {
     return (
         <Router>
-            {/* <Header
-                token={token}
-                setuserInformationsInMemoryAndInCookie={
-                    setuserInformationsInMemoryAndInCookie
-                }
-                titleSearch={titleSearch}
-                setTitleSearch={setTitleSearch}
-                priceRange={priceRange}
-                setPriceRange={setPriceRange}
-            /> */}
+            <Header />
             <Switch>
                 {/* <Route path="/login">
                     <Login

@@ -1,0 +1,28 @@
+@font-face {
+    font-family: "Nunito";
+    src: url("./assets/fonts/Nunito-ExtraBold.eot");
+    src: url("./assets/fonts/Nunito-ExtraBold.eot?#iefix")
+            format("embedded-opentype"),
+        url("./assets/fonts/Nunito-ExtraBold.woff2") format("woff2"),
+        url("./assets/fonts/Nunito-ExtraBold.woff") format("woff"),
+        url("./assets/fonts/Nunito-ExtraBold.ttf") format("truetype"),
+        url("./assets/fonts/Nunito-ExtraBold.svg#Nunito-ExtraBold")
+            format("svg");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("./assets/fonts/Nunito-Regular.eot");
+    src: url("./assets/fonts/Nunito-Regular.eot?#iefix")
+            format("embedded-opentype"),
+        url("./assets/fonts/Nunito-Regular.woff2") format("woff2"),
+        url("./assets/fonts/Nunito-Regular.woff") format("woff"),
+        url("./assets/fonts/Nunito-Regular.ttf") format("truetype"),
+        url("./assets/fonts/Nunito-Regular.svg#Nunito-Regular") format("svg");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

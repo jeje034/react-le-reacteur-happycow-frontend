@@ -1,5 +1,29 @@
+.backgroundTopImage {
+    width: 100vw;
+    height: 320px;
+    object-fit: cover;
+}
+
+.home-wave-image {
+    margin-top: -80px;
+}
+
 .container-4-columns {
     width: 1152px;
     margin: 0 auto;
     //background-color: green;
+}
+
+.home-h2 {
+    font-size: 30px;
+    color: #444444;
+    margin-top: 0;
+    font-family: "Nunito";
+    font-weight: 800;
+}
+
+@media (min-width: 1200px) {
+    .home-h2 {
+        margin-top: -185px;
+    }
 }

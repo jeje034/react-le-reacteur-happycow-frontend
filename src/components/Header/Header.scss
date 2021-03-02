@@ -1,0 +1,28 @@
+.header-header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.header-image {
+    width: 160px;
+    max-height: 70px;
+    margin-left: 20px;
+    margin-top: 4px;
+}
+
+.header-separator {
+    height: 4px;
+    background-color: #7c4ec4;
+}
+
+@media (min-width: 1200px) {
+    .header-header {
+        height: 60px;
+    }
+    .header-image {
+        width: 180px;
+        max-height: 41px;
+        margin-top: -8px;
+    }
+}

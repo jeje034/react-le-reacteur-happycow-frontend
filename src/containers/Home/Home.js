@@ -3,7 +3,7 @@ import "./Home.scss";
 import { useEffect, useState } from "react";
 
 import establishments from "../../assets/establishments.json";
-
+import backgroundTopImage from "../../assets/bg.home.large.tuesday.webp";
 //<title>Find Vegan &amp; Vegetarian Restaurants Near Me - HappyCow</title> Msgjs21
 
 //1200 and more : 4 établissements par ligne : 1152 de largeur : 4 images de 270 (* 175) + 3 marges de 24 = 1080 + 72 = 1152
@@ -208,11 +208,31 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="container-4-columns">
+        <div>
+            <img
+                className="backgroundTopImage"
+                alt="HappyCow background food"
+                src={backgroundTopImage}
+            ></img>
+            <svg
+                className="home-wave-image"
+                data-name="Cta layer"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1366 217"
+                preserveAspectRatio="xMaxYMax meet"
+            >
+                <path
+                    d="M0,601a1849.2,1849.2,0,0,1,370-47c246.77-6.15,360,41.14,613,38,95.54-1.19,226.52-9.76,383-42q-.26,108.75-.5,217.5H-.5Z"
+                    fill="#ffffff"
+                    transform="translate(0 -550)"
+                ></path>
+            </svg>
             {isDownloadingVeganFoodNearMe ? (
-                <div>Chargement en cours</div>
+                <div className="container-4-columns">Chargement en cours</div>
             ) : (
-                <>
+                <div className="container-4-columns">
+                    <h2 className="home-h2">Vegan Food Near Me</h2>
                     {veganFoodNearMeArray.map((restaurant, index) => {
                         return (
                             <div key={restaurant.placeId}>
@@ -276,7 +296,7 @@ const Home = () => {
                                 </div>
                             );
                         })} */}
-                </>
+                </div>
             )}
         </div>
     );
