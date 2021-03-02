@@ -1,6 +1,9 @@
 import "./Home.scss";
 
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 import establishments from "../../assets/establishments.json";
 import backgroundTopImage from "../../assets/bg.home.large.tuesday.webp";
@@ -15,7 +18,6 @@ const useRealGpsCoordinates = false; //msgjs21 indiquer dans le readme.md qu'on 
 
 const Home = () => {
     console.log("deb home");
-
     const [gpsCoordinates, setgpsCoordinates] = useState();
     const [veganFoodNearMeArray, setVeganFoodNearMeArray] = useState([]);
     const [bAndBsNearMeArray, setBAndBsNearMeArray] = useState([]);
@@ -207,6 +209,59 @@ const Home = () => {
         fetchData();
     }, []);
 
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+    const mayDisplay2Cards = useMediaQuery({ maxWidth: 992 });
+    const mayDisplay3Cards = useMediaQuery({ maxWidth: 1199 });
+    let deviceScreen;
+
+    if (isMobile) {
+        deviceScreen = "mobile";
+    } else if (mayDisplay2Cards) {
+        deviceScreen = "twoCards";
+    } else if (mayDisplay3Cards) {
+        deviceScreen = "threeCards";
+    } else {
+        deviceScreen = "foursCards";
+    }
+    console.log("deviceScreen;", deviceScreen);
+
+    //1200 and more : 4 établissements par ligne : 1152 de largeur : 4 images de 270 (* 175) + 3 marges de 24 = 1080 + 72 = 1152
+    //992 -> 1199 : 3 établissements par ligne
+    //768 -> 992 : 2 établissements entiers par ligne
+    //0 -> 767 : 1.x établissements par ligne
+    const responsive = {
+        foursCards: {
+            breakpoint: { max: 3000, min: 1199 },
+            items: 4,
+            //slidesToSlide: 3, // optional, default to 1.
+        },
+        threeCards: {
+            breakpoint: { max: 1199, min: 992 },
+            items: 3,
+            //slidesToSlide: 2, // optional, default to 1.
+        },
+        twoCards: {
+            breakpoint: { max: 992, min: 767 },
+            items: 2,
+            //slidesToSlide: 2, // optional, default to 1.
+        },
+        mobile: {
+            breakpoint: { max: 767, min: 0 },
+            items: 1.3,
+            slidesToSlide: 1, // optional, default to 1.
+        },
+    };
+
+    const getEstblishmentCard = (indice) => {
+        if (veganFoodNearMeArray.length >= indice + 1) {
+            return (
+                <div className="home-establishment-card">
+                    {"" + indice + " - " + veganFoodNearMeArray[indice].name}
+                </div>
+            );
+        }
+    };
+
     return (
         <div>
             <img
@@ -229,11 +284,46 @@ const Home = () => {
                 ></path>
             </svg>
             {isDownloadingVeganFoodNearMe ? (
-                <div className="container-4-columns">Chargement en cours</div>
+                <div className="container-x-columns">Chargement en cours</div>
             ) : (
-                <div className="container-4-columns">
+                <div className="container-x-columns">
                     <h2 className="home-h2">Vegan Food Near Me</h2>
-                    {veganFoodNearMeArray.map((restaurant, index) => {
+                    {/* <h3>{deviceScreen}</h3> */}
+                    <Carousel
+                        swipeable={deviceScreen === "mobile"} //Peut-on le faire défiler à la main
+                        draggable={false}
+                        showDots={false} //Pour masquer les petits points (dots dans le doc) en bas permettant de savoir sur quelle "page on est" et aussi de se déplacer
+                        responsive={responsive}
+                        ssr={true} // means to render carousel on server-side.
+                        infinite={false}
+                        autoPlay={false} //msgjs21 this.props.deviceType !== "mobile" ? true : false
+                        autoPlaySpeed={1000}
+                        keyBoardControl={true}
+                        customTransition={
+                            deviceScreen === "mobile"
+                                ? "none 0"
+                                : "transform 300ms ease-in-out"
+                        } //"none 0" //"all .5"
+                        transitionDuration={300} //{deviceScreen === "mobile" ? 0 : 300}
+                        containerClass="carousel-container"
+                        removeArrowOnDeviceType={["mobile"]}
+                        deviceType={deviceScreen} //msgjs21 {this.props.deviceType}
+                        dotListClass="custom-dot-list-style"
+                        itemClass="carousel-item-padding-40-px"
+                    >
+                        {getEstblishmentCard(0)}
+                        {getEstblishmentCard(1)}
+                        {getEstblishmentCard(2)}
+                        {getEstblishmentCard(3)}
+                        {getEstblishmentCard(4)}
+                        {getEstblishmentCard(5)}
+                        {getEstblishmentCard(6)}
+                        {getEstblishmentCard(7)}
+                        {getEstblishmentCard(8)}
+                        {getEstblishmentCard(9)}
+                    </Carousel>
+                    ;
+                    {/* {veganFoodNearMeArray.map((restaurant, index) => {
                         return (
                             <div key={restaurant.placeId}>
                                 {`${getDistanceFromBrowserForDebug(
@@ -248,11 +338,9 @@ const Home = () => {
                                 }`}
                             </div>
                         );
-                    })}
-
+                    })} */}
                     <br></br>
-
-                    {bAndBsNearMeArray.map((bAndB, index) => {
+                    {/* {bAndBsNearMeArray.map((bAndB, index) => {
                         return (
                             <div key={bAndB.placeId}>
                                 {`${getDistanceFromBrowserForDebug(
@@ -265,16 +353,13 @@ const Home = () => {
                                 }, address ${bAndB.address}`}
                             </div>
                         );
-                    })}
-
+                    })} */}
                     <br></br>
-
                     {establishmentsTypesForDebug.map((type, index) => {
                         return (
                             <div key={index}>{"" + index + " : " + type}</div>
                         );
                     })}
-
                     {/*  Exemple de filtre sur un map
                     
                     {restaurants

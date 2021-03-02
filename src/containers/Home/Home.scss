@@ -1,5 +1,5 @@
 .backgroundTopImage {
-    width: 100vw;
+    width: 100%; //msgjs21 100% OK mais pourquoi 100vw fait un peu plus grand ?
     height: 320px;
     object-fit: cover;
 }
@@ -8,10 +8,10 @@
     margin-top: -80px;
 }
 
-.container-4-columns {
-    width: 1152px;
-    margin: 0 auto;
-    //background-color: green;
+.container-x-columns {
+    width: 100;
+    margin: 0 0 0 12px;
+    background-color: orange;
 }
 
 .home-h2 {
@@ -20,10 +20,71 @@
     margin-top: 0;
     font-family: "Nunito";
     font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.home-establishment-card {
+    width: calc(100% - 24px);
+    height: 335px;
+    background-color: aqua;
+}
+
+//1200 and more : 4 établissements par ligne : 1152 de largeur : 4 images de 270 (* 175) + 3 marges de 24 = 1080 + 72 = 1152
+//992 -> 1199 : 3 établissements par ligne
+//768 -> 992 : 2 établissements entiers par ligne
+//0 -> 767 : 1.x établissements par ligne
+
+@media (min-width: 768px) {
+    .container-x-columns {
+        width: calc(100% - 24px);
+        margin: 0 auto;
+        background-color: yellow;
+    }
+    .home-h2 {
+        margin-top: -95px;
+        margin-bottom: 40px;
+    }
+    .home-establishment-card {
+        width: calc(100% - 24px);
+        height: 414px;
+        background-color: green;
+    }
+}
+
+@media (min-width: 992px) {
+    .container-x-columns {
+        width: calc(
+            100% - 48px
+        ); //100% -48px OK mais pourquoi 100vw - 48px n'est pas tout à fait OK ?
+        margin: 0 auto;
+        background-color: red;
+    }
+    .home-h2 {
+        margin-top: -95px;
+        margin-bottom: 40px;
+    }
+    .home-establishment-card {
+        width: calc(100% - 24px);
+        height: 410px;
+        background-color: purple;
+    }
 }
 
 @media (min-width: 1200px) {
+    .container-x-columns {
+        width: calc(
+            1152px + 24px
+        ); //+24 px à cause du package react-multi-carousel qui veut une marge à droite de la dernière card
+        margin: 0 auto;
+        background-color: green;
+    }
     .home-h2 {
-        margin-top: -185px;
+        margin-top: -95px;
+        margin-bottom: 40px;
+    }
+    .home-establishment-card {
+        width: 270px;
+        height: 335px;
+        background-color: aqua;
     }
 }
