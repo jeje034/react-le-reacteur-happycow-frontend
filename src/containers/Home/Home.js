@@ -304,62 +304,73 @@ const Home = () => {
     const getEstblishmentCard = (indice) => {
         if (veganFoodNearMeArray.length >= indice + 1) {
             return (
-                <Link
-                    key={veganFoodNearMeArray[indice].placeId}
-                    // to={`/offer/${offer._id}`}
-                    to={`/reviews`}
-                    target="_blank"
-                    style={{
-                        textDecoration: "none",
-                        color: "black",
-                    }}
-                >
-                    <div className="home-establishment-card">
+                <div className="home-establishment-card">
+                    <Link
+                        key={veganFoodNearMeArray[indice].placeId}
+                        // to={`/offer/${offer._id}`}
+                        to={`/reviews`}
+                        target="_blank"
+                        style={{
+                            textDecoration: "none",
+                            color: "black",
+                        }}
+                    >
                         <img
                             className="home-card-image"
                             alt={veganFoodNearMeArray[indice].name}
                             src={veganFoodNearMeArray[indice].thumbnail}
                         ></img>
-                        <div className="home-establishment-type-and-name">
-                            {veganFoodNearMeArray[indice].type ===
-                                "veg-options" && (
-                                <img
-                                    className="home-establishment-type-image"
-                                    src={vegOptionImage}
-                                    alt="veg-options"
-                                />
-                            )}
-                            {veganFoodNearMeArray[indice].type === "vegan" && (
-                                <img
-                                    className="home-establishment-type-image"
-                                    src={veganImage}
-                                    alt="vegan"
-                                />
-                            )}
-                            {veganFoodNearMeArray[indice].type ===
-                                "vegetarian" && (
-                                <img
-                                    className="home-establishment-type-image"
-                                    src={vegetarianImage}
-                                    alt="vegetarian"
-                                />
-                            )}
+                    </Link>
 
+                    <div className="home-establishment-type-and-name">
+                        {veganFoodNearMeArray[indice].type ===
+                            "veg-options" && (
+                            <img
+                                className="home-establishment-type-image"
+                                src={vegOptionImage}
+                                alt="veg-options"
+                            />
+                        )}
+                        {veganFoodNearMeArray[indice].type === "vegan" && (
+                            <img
+                                className="home-establishment-type-image"
+                                src={veganImage}
+                                alt="vegan"
+                            />
+                        )}
+                        {veganFoodNearMeArray[indice].type === "vegetarian" && (
+                            <img
+                                className="home-establishment-type-image"
+                                src={vegetarianImage}
+                                alt="vegetarian"
+                            />
+                        )}
+                        <Link
+                            key={veganFoodNearMeArray[indice].placeId}
+                            // to={`/offer/${offer._id}`}
+                            to={`/reviews`}
+                            target="_blank"
+                            style={{
+                                textDecoration: "none",
+                                color: "black",
+                            }}
+                        >
                             <div className="home-establishment-name">
                                 {veganFoodNearMeArray[indice].name.length > 20
                                     ? veganFoodNearMeArray[
                                           indice
                                       ].name.substring(0, 20) + "…"
                                     : veganFoodNearMeArray[indice].name}
-                            </div>
-                        </div>
-                        {/*
+                            </div>{" "}
+                        </Link>
+                    </div>
+                    {/*
                     Le Caboulot de la Se…
                     Les Demoiselles de M…                    
                     Green Lab - Comédie
 
                      */}
-                        {/*
+                    {/*
      Récupérer à partir d'adresse semble délicat
      "9 Rue Quincampoix (at 4t…rondissement), Paris, …"
      "31 rue Vieille du Temple, Paris, France, 75004"
@@ -367,12 +378,11 @@ const Home = () => {
 
      => à partir de coorodnnées
       */}
-                        <div className="home-adress">Ville, Pays</div>
+                    <div className="home-adress">Ville, Pays</div>
 
-                        {getStars(veganFoodNearMeArray[indice].rating)}
-                        <p>{veganFoodNearMeArray[indice].description}</p>
-                    </div>
-                </Link>
+                    {getStars(veganFoodNearMeArray[indice].rating)}
+                    <p>{veganFoodNearMeArray[indice].description}</p>
+                </div>
             );
         }
     };
