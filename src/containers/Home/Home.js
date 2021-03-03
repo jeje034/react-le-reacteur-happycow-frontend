@@ -446,7 +446,7 @@ const Home = () => {
                         {getEstblishmentCard(8)}
                         {getEstblishmentCard(9)}
                     </Carousel>
-                    ;
+
                     {/* {veganFoodNearMeArray.map((restaurant, index) => {
                         return (
                             <div key={restaurant.placeId}>
@@ -478,6 +478,13 @@ const Home = () => {
                             </div>
                         );
                     })} */}
+                    <div>{bAndBsNearMeArray[0].name}</div>
+                    <div>
+                        {getDistanceFromBrowserForDebug(
+                            bAndBsNearMeArray[0].location.lat,
+                            bAndBsNearMeArray[0].location.lng
+                        ).toFixed(1) + " km"}
+                    </div>
                     <br></br>
                     {establishmentsTypesForDebug.map((type, index) => {
                         return (
