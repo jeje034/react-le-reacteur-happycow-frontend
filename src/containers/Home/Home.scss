@@ -11,7 +11,7 @@
 .container-x-columns {
     width: 100;
     margin: 0 0 0 12px;
-    background-color: orange;
+    // background-color: orange;
 }
 
 .home-h2 {
@@ -25,8 +25,66 @@
 
 .home-establishment-card {
     width: calc(100% - 24px);
-    height: 335px;
-    background-color: aqua;
+    height: 410px;
+    // background-color: aqua;
+}
+
+.home-card-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 7px;
+}
+
+.home-establishment-type-and-name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.home-establishment-type-image {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+}
+
+.home-establishment-name {
+    color: #4caf50; //msgjs21 il y a une couleur hoover
+    font-family: "Nunito";
+    font-weight: 700;
+}
+
+.home-adress {
+    font-family: "Nunito";
+    font-weight: 700;
+    color: #777777;
+    margin-bottom: 5px;
+}
+
+.home-star {
+    width: 20px;
+    height: 20px;
+}
+
+.home-around-star {
+    margin-bottom: 10px;
+}
+
+.home-establishment-card > p {
+    font-family: "Nunito";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+
+    // Début du code pour les points de suspension
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    padding: 0;
+    // Fin du code pour les points de suspension
 }
 
 //1200 and more : 4 établissements par ligne : 1152 de largeur : 4 images de 270 (* 175) + 3 marges de 24 = 1080 + 72 = 1152
@@ -38,7 +96,7 @@
     .container-x-columns {
         width: calc(100% - 24px);
         margin: 0 auto;
-        background-color: yellow;
+        // background-color: yellow;
     }
     .home-h2 {
         margin-top: -95px;
@@ -47,7 +105,10 @@
     .home-establishment-card {
         width: calc(100% - 24px);
         height: 414px;
-        background-color: green;
+        // background-color: green;
+    }
+    .home-card-image {
+        height: 255px;
     }
 }
 
@@ -57,7 +118,7 @@
             100% - 48px
         ); //100% -48px OK mais pourquoi 100vw - 48px n'est pas tout à fait OK ?
         margin: 0 auto;
-        background-color: red;
+        // background-color: red;
     }
     .home-h2 {
         margin-top: -95px;
@@ -66,7 +127,7 @@
     .home-establishment-card {
         width: calc(100% - 24px);
         height: 410px;
-        background-color: purple;
+        // background-color: purple;
     }
 }
 
@@ -76,7 +137,7 @@
             1152px + 24px
         ); //+24 px à cause du package react-multi-carousel qui veut une marge à droite de la dernière card
         margin: 0 auto;
-        background-color: green;
+        // background-color: green;
     }
     .home-h2 {
         margin-top: -95px;
@@ -85,6 +146,9 @@
     .home-establishment-card {
         width: 270px;
         height: 335px;
-        background-color: aqua;
+        // background-color: aqua;
+    }
+    .home-card-image {
+        height: 175px;
     }
 }

@@ -2,11 +2,19 @@ import "./Home.scss";
 
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import establishments from "../../assets/establishments.json";
 import backgroundTopImage from "../../assets/bg.home.large.tuesday.webp";
+import vegOptionImage from "../../assets/category_veg-options.svg";
+import veganImage from "../../assets/category_vegan.svg";
+import vegetarianImage from "../../assets/category_vegetarian.svg";
+import starIcon from "../../assets/Star.png";
+import emptyStarIcon from "../../assets/EmptyStar.png";
+import halfStarIcon from "../../assets/HalfStar.png";
+
 //<title>Find Vegan &amp; Vegetarian Restaurants Near Me - HappyCow</title> Msgjs21
 
 //1200 and more : 4 établissements par ligne : 1152 de largeur : 4 images de 270 (* 175) + 3 marges de 24 = 1080 + 72 = 1152
@@ -252,12 +260,119 @@ const Home = () => {
         },
     };
 
+    const getStars = (rating) => {
+        const stars = [];
+        for (let i = 0; i < 5; i++) {
+            if (rating - 1 >= 0) {
+                stars.push(1);
+            } else if (rating - 0.5 >= 0) {
+                stars.push(0.5);
+            } else {
+                stars.push(0);
+            }
+            rating--;
+        }
+
+        return (
+            <div className="home-around-star">
+                {stars.map((element, indice) => {
+                    return (
+                        <img
+                            key={indice}
+                            className="home-star"
+                            src={
+                                element === 1
+                                    ? starIcon
+                                    : element === 0.5
+                                    ? halfStarIcon
+                                    : emptyStarIcon
+                            }
+                            alt={
+                                element === starIcon
+                                    ? "Star"
+                                    : element === halfStarIcon
+                                    ? "Half star"
+                                    : "No star"
+                            }
+                        />
+                    );
+                })}
+            </div>
+        );
+    };
+
     const getEstblishmentCard = (indice) => {
         if (veganFoodNearMeArray.length >= indice + 1) {
             return (
-                <div className="home-establishment-card">
-                    {"" + indice + " - " + veganFoodNearMeArray[indice].name}
-                </div>
+                <Link
+                    key={veganFoodNearMeArray[indice].placeId}
+                    // to={`/offer/${offer._id}`}
+                    to={`/reviews`}
+                    target="_blank"
+                    style={{
+                        textDecoration: "none",
+                        color: "black",
+                    }}
+                >
+                    <div className="home-establishment-card">
+                        <img
+                            className="home-card-image"
+                            alt={veganFoodNearMeArray[indice].name}
+                            src={veganFoodNearMeArray[indice].thumbnail}
+                        ></img>
+                        <div className="home-establishment-type-and-name">
+                            {veganFoodNearMeArray[indice].type ===
+                                "veg-options" && (
+                                <img
+                                    className="home-establishment-type-image"
+                                    src={vegOptionImage}
+                                    alt="veg-options"
+                                />
+                            )}
+                            {veganFoodNearMeArray[indice].type === "vegan" && (
+                                <img
+                                    className="home-establishment-type-image"
+                                    src={veganImage}
+                                    alt="vegan"
+                                />
+                            )}
+                            {veganFoodNearMeArray[indice].type ===
+                                "vegetarian" && (
+                                <img
+                                    className="home-establishment-type-image"
+                                    src={vegetarianImage}
+                                    alt="vegetarian"
+                                />
+                            )}
+
+                            <div className="home-establishment-name">
+                                {veganFoodNearMeArray[indice].name.length > 20
+                                    ? veganFoodNearMeArray[
+                                          indice
+                                      ].name.substring(0, 20) + "…"
+                                    : veganFoodNearMeArray[indice].name}
+                            </div>
+                        </div>
+                        {/*
+                    Le Caboulot de la Se…
+                    Les Demoiselles de M…                    
+                    Green Lab - Comédie
+
+                     */}
+                        {/*
+     Récupérer à partir d'adresse semble délicat
+     "9 Rue Quincampoix (at 4t…rondissement), Paris, …"
+     "31 rue Vieille du Temple, Paris, France, 75004"
+     "22, Rue des Ecouffes, Paris, France, 75004"
+
+     => à partir de coorodnnées
+      */}
+                        <div className="home-adress">Ville, Pays</div>
+
+                        {getStars(veganFoodNearMeArray[indice].rating)}
+                        <p>{veganFoodNearMeArray[indice].description}</p>
+                    </div>
+                </Link>
             );
         }
     };
@@ -288,9 +403,8 @@ const Home = () => {
             ) : (
                 <div className="container-x-columns">
                     <h2 className="home-h2">Vegan Food Near Me</h2>
-                    {/* <h3>{deviceScreen}</h3> */}
                     <Carousel
-                        swipeable={deviceScreen === "mobile"} //Peut-on le faire défiler à la main
+                        swipeable={deviceScreen === "mobile"} //Peut-on le faire défiler à la main ?
                         draggable={false}
                         showDots={false} //Pour masquer les petits points (dots dans le doc) en bas permettant de savoir sur quelle "page on est" et aussi de se déplacer
                         responsive={responsive}
@@ -302,9 +416,9 @@ const Home = () => {
                         customTransition={
                             deviceScreen === "mobile"
                                 ? "none 0"
-                                : "transform 300ms ease-in-out"
+                                : "transform 200ms ease-in-out"
                         } //"none 0" //"all .5"
-                        transitionDuration={300} //{deviceScreen === "mobile" ? 0 : 300}
+                        transitionDuration={200} //{deviceScreen === "mobile" ? 0 : 300}
                         containerClass="carousel-container"
                         removeArrowOnDeviceType={["mobile"]}
                         deviceType={deviceScreen} //msgjs21 {this.props.deviceType}

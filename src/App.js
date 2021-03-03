@@ -1,7 +1,9 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Home from "./containers/Home/Home";
 import Header from "./components/Header/Header";
+import Reviews from "./containers/Reviews/Reviews";
 
 function App() {
     return (
@@ -17,14 +19,14 @@ function App() {
                         baseUrl={baseUrl}
                     />
                 </Route>
-                <Route path="/publish">
-                    <Publish baseUrl={baseUrl} token={token} />
-                </Route>
                 <Route path="/payment">
                     <Elements stripe={stripePromise}>
                         <Payment baseUrl={baseUrl} token={token} />
                     </Elements>
                 </Route> */}
+                <Route path="/reviews">
+                    <Reviews />
+                </Route>
                 <Route path="/">
                     <Home />
                 </Route>
