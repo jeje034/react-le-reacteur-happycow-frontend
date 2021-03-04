@@ -2,18 +2,10 @@ import "./Home.scss";
 
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Link } from "react-router-dom";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 
 import establishments from "../../assets/establishments.json";
-import backgroundTopImage from "../../assets/bg.home.large.tuesday.webp";
-import vegOptionImage from "../../assets/category_veg-options.svg";
-import veganImage from "../../assets/category_vegan.svg";
-import vegetarianImage from "../../assets/category_vegetarian.svg";
-import starIcon from "../../assets/Star.png";
-import emptyStarIcon from "../../assets/EmptyStar.png";
-import halfStarIcon from "../../assets/HalfStar.png";
+
+import EstablishmentsSection from "../../components/EstablishmentsSection/EstablishmentsSection";
 
 //<title>Find Vegan &amp; Vegetarian Restaurants Near Me - HappyCow</title> Msgjs21
 
@@ -23,6 +15,24 @@ import halfStarIcon from "../../assets/HalfStar.png";
 //0 -> 767 : 1.x établissements par ligne
 
 const useRealGpsCoordinates = false; //msgjs21 indiquer dans le readme.md qu'on prend les coordonnées de paris pour avoir des données
+
+const getBackgroundTopImage = () => {
+    const testDay = new Date();
+    let dayInNumerals = testDay.getDay();
+
+    //msgjs21 Supprimer ce if une fois qu'on aura les images pour chaque jour (donc 7 images en tout)
+    if (dayInNumerals === 2 || dayInNumerals === 3 || dayInNumerals === 4) {
+        const dayInLetters = new Intl.DateTimeFormat("en-US", {
+            weekday: "long",
+        })
+            .format(testDay)
+            .toLowerCase();
+
+        return `/assets/bg.home.large.${dayInLetters}.webp`;
+    } else {
+        return "/assets/bg.home.large.thursday.webp";
+    }
+};
 
 const Home = () => {
     console.log("deb home");
@@ -81,14 +91,14 @@ const Home = () => {
                         };
 
                         gpsCoordinatesFound = true;
-                        console.log(
-                            "Gps coordinates fond:",
-                            `${position.coords.latitude}, ${position.coords.longitude}`
-                        );
+                        // console.log(
+                        //     "Gps coordinates fond:",
+                        //     `${position.coords.latitude}, ${position.coords.longitude}`
+                        // );
                         //Lat, long mtp, proche de Jérôme : 43.6174848, 3.9124991999999996
                     });
                 } else {
-                    console.log("Geolocation not Available");
+                    console.log("Geolocation not available");
                 }
             }
 
@@ -167,7 +177,7 @@ const Home = () => {
                 }
                 if (bAndBsCounter < 10 && establishment.type === "B&B") {
                     bAndBsNearMe.push(establishment);
-                    bAndBsCounter++;
+                    bAndBsCounter++; //Comme j'ai seulement 2 B&Bs dans ma base, je ne fais pas d'algo spécial pour les sélectionner.
                 }
 
                 if (restaurantsCounter === 10 && bAndBsCounter === 10) {
@@ -231,7 +241,6 @@ const Home = () => {
     } else {
         deviceScreen = "foursCards";
     }
-    console.log("deviceScreen;", deviceScreen);
 
     //1200 and more : 4 établissements par ligne : 1152 de largeur : 4 images de 270 (* 175) + 3 marges de 24 = 1080 + 72 = 1152
     //992 -> 1199 : 3 établissements par ligne
@@ -260,224 +269,66 @@ const Home = () => {
         },
     };
 
-    const getStars = (rating) => {
-        const stars = [];
-        for (let i = 0; i < 5; i++) {
-            if (rating - 1 >= 0) {
-                stars.push(1);
-            } else if (rating - 0.5 >= 0) {
-                stars.push(0.5);
-            } else {
-                stars.push(0);
-            }
-            rating--;
-        }
-
-        return (
-            <div className="home-around-star">
-                {stars.map((element, indice) => {
-                    return (
-                        <img
-                            key={indice}
-                            className="home-star"
-                            src={
-                                element === 1
-                                    ? starIcon
-                                    : element === 0.5
-                                    ? halfStarIcon
-                                    : emptyStarIcon
-                            }
-                            alt={
-                                element === starIcon
-                                    ? "Star"
-                                    : element === halfStarIcon
-                                    ? "Half star"
-                                    : "No star"
-                            }
-                        />
-                    );
-                })}
-            </div>
-        );
-    };
-
-    const getEstblishmentCard = (indice) => {
-        if (veganFoodNearMeArray.length >= indice + 1) {
-            return (
-                <div className="home-establishment-card">
-                    <Link
-                        key={veganFoodNearMeArray[indice].placeId}
-                        // to={`/offer/${offer._id}`}
-                        to={`/reviews`}
-                        target="_blank"
-                        style={{
-                            textDecoration: "none",
-                            color: "black",
-                        }}
-                    >
-                        <img
-                            className="home-card-image"
-                            alt={veganFoodNearMeArray[indice].name}
-                            src={veganFoodNearMeArray[indice].thumbnail}
-                        ></img>
-                    </Link>
-
-                    <div className="home-establishment-type-and-name">
-                        {veganFoodNearMeArray[indice].type ===
-                            "veg-options" && (
-                            <img
-                                className="home-establishment-type-image"
-                                src={vegOptionImage}
-                                alt="veg-options"
-                            />
-                        )}
-                        {veganFoodNearMeArray[indice].type === "vegan" && (
-                            <img
-                                className="home-establishment-type-image"
-                                src={veganImage}
-                                alt="vegan"
-                            />
-                        )}
-                        {veganFoodNearMeArray[indice].type === "vegetarian" && (
-                            <img
-                                className="home-establishment-type-image"
-                                src={vegetarianImage}
-                                alt="vegetarian"
-                            />
-                        )}
-                        <Link
-                            key={veganFoodNearMeArray[indice].placeId}
-                            // to={`/offer/${offer._id}`}
-                            to={`/reviews`}
-                            target="_blank"
-                            style={{
-                                textDecoration: "none",
-                                color: "black",
-                            }}
-                        >
-                            <div className="home-establishment-name">
-                                {veganFoodNearMeArray[indice].name.length > 20
-                                    ? veganFoodNearMeArray[
-                                          indice
-                                      ].name.substring(0, 20) + "…"
-                                    : veganFoodNearMeArray[indice].name}
-                            </div>{" "}
-                        </Link>
-                    </div>
-                    {/*
-                    Le Caboulot de la Se…
-                    Les Demoiselles de M…                    
-                    Green Lab - Comédie
-
-                     */}
-                    {/*
-     Récupérer à partir d'adresse semble délicat
-     "9 Rue Quincampoix (at 4t…rondissement), Paris, …"
-     "31 rue Vieille du Temple, Paris, France, 75004"
-     "22, Rue des Ecouffes, Paris, France, 75004"
-
-     => à partir de coorodnnées
-      */}
-                    <div className="home-adress">Ville, Pays</div>
-
-                    {getStars(veganFoodNearMeArray[indice].rating)}
-                    <p>{veganFoodNearMeArray[indice].description}</p>
-                </div>
-            );
-        }
-    };
-
     return (
         <div>
             <img
-                className="backgroundTopImage"
+                className="home-backgroundTopImage"
                 alt="HappyCow background food"
-                src={backgroundTopImage}
+                src={getBackgroundTopImage()}
             ></img>
-            <svg
-                className="home-wave-image"
-                data-name="Cta layer"
-                version="1.1"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 1366 217"
-                preserveAspectRatio="xMaxYMax meet"
-            >
-                <path
-                    d="M0,601a1849.2,1849.2,0,0,1,370-47c246.77-6.15,360,41.14,613,38,95.54-1.19,226.52-9.76,383-42q-.26,108.75-.5,217.5H-.5Z"
-                    fill="#ffffff"
-                    transform="translate(0 -550)"
-                ></path>
-            </svg>
+            {
+                <svg
+                    className="home-wave-image"
+                    data-name="Cta layer"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 1366 217"
+                    preserveAspectRatio="xMaxYMax meet"
+                >
+                    <path
+                        d="M0,601a1849.2,1849.2,0,0,1,370-47c246.77-6.15,360,41.14,613,38,95.54-1.19,226.52-9.76,383-42q-.26,108.75-.5,217.5H-.5Z"
+                        fill="#ffffff"
+                        transform="translate(0 -550)"
+                    ></path>
+                </svg>
+            }
             {isDownloadingVeganFoodNearMe ? (
-                <div className="container-x-columns">Chargement en cours</div>
+                <section className="home-container-is-loading">
+                    Chargement en cours
+                </section>
             ) : (
-                <div className="container-x-columns">
-                    <h2 className="home-h2">Vegan Food Near Me</h2>
-                    <Carousel
-                        swipeable={deviceScreen === "mobile"} //Peut-on le faire défiler à la main ?
-                        draggable={false}
-                        showDots={false} //Pour masquer les petits points (dots dans le doc) en bas permettant de savoir sur quelle "page on est" et aussi de se déplacer
-                        responsive={responsive}
-                        ssr={true} // means to render carousel on server-side.
-                        infinite={false}
-                        autoPlay={false} //msgjs21 this.props.deviceType !== "mobile" ? true : false
-                        autoPlaySpeed={1000}
-                        keyBoardControl={true}
-                        customTransition={
-                            deviceScreen === "mobile"
-                                ? "none 0"
-                                : "transform 200ms ease-in-out"
-                        } //"none 0" //"all .5"
-                        transitionDuration={200} //{deviceScreen === "mobile" ? 0 : 300}
-                        containerClass="carousel-container"
-                        removeArrowOnDeviceType={["mobile"]}
-                        deviceType={deviceScreen} //msgjs21 {this.props.deviceType}
-                        dotListClass="custom-dot-list-style"
-                        itemClass="carousel-item-padding-40-px"
+                <>
+                    <div
+                        style={{
+                            //msgjs21 style à virer ou à mettre dans le scss
+                            marginTop: 20,
+                            marginBottom: 180,
+                            //backgroundColor: "pink",
+                        }}
                     >
-                        {getEstblishmentCard(0)}
-                        {getEstblishmentCard(1)}
-                        {getEstblishmentCard(2)}
-                        {getEstblishmentCard(3)}
-                        {getEstblishmentCard(4)}
-                        {getEstblishmentCard(5)}
-                        {getEstblishmentCard(6)}
-                        {getEstblishmentCard(7)}
-                        {getEstblishmentCard(8)}
-                        {getEstblishmentCard(9)}
-                    </Carousel>
+                        {
+                            <EstablishmentsSection
+                                deviceScreen={deviceScreen}
+                                responsive={responsive}
+                                sectionDatas={veganFoodNearMeArray}
+                                sectionTitle="Vegan Food Near Me"
+                            />
+                        }
+                    </div>
 
-                    {/* {veganFoodNearMeArray.map((restaurant, index) => {
+                    {
+                        <EstablishmentsSection
+                            deviceScreen={deviceScreen}
+                            responsive={responsive}
+                            sectionDatas={bAndBsNearMeArray}
+                            sectionTitle="B&amp;Bs"
+                        />
+                    }
+                    {establishmentsTypesForDebug.map((type, index) => {
                         return (
-                            <div key={restaurant.placeId}>
-                                {`${getDistanceFromBrowserForDebug(
-                                    restaurant.location.lat,
-                                    restaurant.location.lng
-                                ).toFixed(1)} km : ${restaurant.name} : type ${
-                                    restaurant.type
-                                }, category ${restaurant.category}, vegan ${
-                                    restaurant.vegan
-                                }, vegOnly ${restaurant.vegOnly}, address ${
-                                    restaurant.address
-                                }`}
-                            </div>
+                            <div key={index}>{"" + index + " : " + type}</div>
                         );
-                    })} */}
-                    <br></br>
-                    {/* {bAndBsNearMeArray.map((bAndB, index) => {
-                        return (
-                            <div key={bAndB.placeId}>
-                                {`${getDistanceFromBrowserForDebug(
-                                    bAndB.location.lat,
-                                    bAndB.location.lng
-                                ).toFixed(1)} km : ${bAndB.name} : category ${
-                                    bAndB.category
-                                }, vegan ${bAndB.vegan}, vegOnly ${
-                                    bAndB.vegOnly
-                                }, address ${bAndB.address}`}
-                            </div>
-                        );
-                    })} */}
+                    })}
                     <div>{bAndBsNearMeArray[0].name}</div>
                     <div>
                         {getDistanceFromBrowserForDebug(
@@ -485,34 +336,7 @@ const Home = () => {
                             bAndBsNearMeArray[0].location.lng
                         ).toFixed(1) + " km"}
                     </div>
-                    <br></br>
-                    {establishmentsTypesForDebug.map((type, index) => {
-                        return (
-                            <div key={index}>{"" + index + " : " + type}</div>
-                        );
-                    })}
-                    {/*  Exemple de filtre sur un map
-                    
-                    {restaurants
-                        .filter(
-                            (restaurant) =>
-                                !restaurant.address.includes("Paris")
-                        )
-                        .map((restaurant, index) => {
-                            //console.log(restaurant.location);
-                            return (
-                                <div key={restaurant.placeId}>
-                                    {"2 - restaurants sans Paris - " +
-                                        distance(
-                                            restaurant.location.lat,
-                                            restaurant.location.lng
-                                        ) +
-                                        " - " +
-                                        restaurant.address}
-                                </div>
-                            );
-                        })} */}
-                </div>
+                </>
             )}
         </div>
     );

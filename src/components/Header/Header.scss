@@ -26,3 +26,15 @@
         margin-top: -8px;
     }
 }
+
+@media (min-width: 1320px) {
+    .header-header {
+        height: 66px;
+    }
+    .header-image {
+        width: 200px;
+        max-height: 50px;
+        margin-top: -9px;
+        margin-left: 25px;
+    }
+}
