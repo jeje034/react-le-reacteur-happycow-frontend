@@ -1,13 +1,20 @@
-.home-backgroundTopImage {
+.home-background-top-image-relative {
     width: 100%; //msgjs21 100% OK mais pourquoi 100vw fait un peu plus grand ?
-    height: 320px;
+    height: 352px;
     object-fit: cover;
+    position: relative;
 }
 
-.home-wave-image {
-    margin-top: -80px;
+.home-around-wave-absolute {
+    width: 100%;
+    position: absolute;
+    margin-top: -48px;
+    left: 0;
+    //border: 1px red solid;
 }
 
-.home-container-is-loading {
-    margin: 0 0 0 12px;
+@media (min-width: 768px) {
+    .home-around-wave-absolute {
+        margin-top: -88px;
+    }
 }

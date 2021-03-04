@@ -272,13 +272,13 @@ const Home = () => {
     return (
         <div>
             <img
-                className="home-backgroundTopImage"
+                className="home-background-top-image-relative"
                 alt="HappyCow background food"
                 src={getBackgroundTopImage()}
             ></img>
-            {
+
+            <div className="home-around-wave-absolute">
                 <svg
-                    className="home-wave-image"
                     data-name="Cta layer"
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -291,18 +291,26 @@ const Home = () => {
                         transform="translate(0 -550)"
                     ></path>
                 </svg>
-            }
+            </div>
+
             {isDownloadingVeganFoodNearMe ? (
-                <section className="home-container-is-loading">
-                    Chargement en cours
+                <section
+                    style={{
+                        position: "relative",
+                        textAlign: "center",
+                        fontFamily: "Nunito",
+                        fontSize: 30,
+                    }}
+                >
+                    Chargement en cours...
                 </section>
             ) : (
                 <>
                     <div
                         style={{
-                            //msgjs21 style à virer ou à mettre dans le scss
-                            marginTop: 20,
+                            marginTop: 120,
                             marginBottom: 180,
+                            position: "relative",
                             //backgroundColor: "pink",
                         }}
                     >
