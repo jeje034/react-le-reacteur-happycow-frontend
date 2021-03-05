@@ -7,8 +7,13 @@ $bAndBColor: #1e85a2;
     font-family: "Nunito";
     color: white;
     width: 100%;
-    padding: 0.75rem;
     //Pas de hauteur, les titres courts seront sur une ligne et les titres longs sur 2 lignes, voir plus.
+}
+
+.review-title-and-more-for-justify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .review-vegan-background-color {
@@ -29,10 +34,14 @@ $bAndBColor: #1e85a2;
     font-weight: 700;
     line-height: 2.25rem;
     text-align: center;
+    margin-bottom: 13px;
 }
 
 .reviews-under-h1 {
     display: flex;
+    align-items: center;
+    margin-bottom: 7px;
+    //border: #8a2091 1px solid;
 }
 
 .review-establishment-type {
@@ -45,6 +54,7 @@ $bAndBColor: #1e85a2;
     padding-left: 0.25rem;
     padding-right: 0.25rem;
     font-size: 0.75rem;
+    margin-right: 12px;
 }
 .review-vegan-color {
     color: $veganColor;
@@ -65,8 +75,56 @@ $bAndBColor: #1e85a2;
     margin-right: 4px;
 }
 
-@media (min-width: 635px) {
+.reviews-rating-in-stars {
+    display: flex;
+    align-items: center;
+    //border: red 2px solid;
+}
+
+.reviews-container {
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+@media (min-width: 576px) {
+    .review-title-and-more-for-justify {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
     .reviews-h1 {
         text-align: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .review-title-and-more-for-justify {
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+
+    .reviews-container {
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .review-title-and-more-for-justify {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 24px;
+        padding-right: 24px;
+        max-width: 1200px;
+    }
+    .reviews-container {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 24px;
+        padding-right: 24px;
+        max-width: 1200px;
     }
 }

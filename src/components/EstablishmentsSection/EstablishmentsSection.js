@@ -5,10 +5,8 @@ import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import starIcon from "../../assets/Star.png";
-import emptyStarIcon from "../../assets/EmptyStar.png";
-import halfStarIcon from "../../assets/HalfStar.png";
 import GetEstablishmentTypeIcon from "../WithoutHtml/GetEstablishmentTypeIcon";
+import RatingInStars from "../RatingInStars/RatingInStars";
 
 const EstablishmentsSection = ({
     deviceScreen,
@@ -83,52 +81,13 @@ const EstablishmentsSection = ({
                         Ville, Pays
                     </div>
 
-                    {getStars(sectionDatas[indice].rating)}
+                    <div className="establishment-section-around-star">
+                        <RatingInStars rating={sectionDatas[indice].rating} />
+                    </div>
                     <p>{sectionDatas[indice].description}</p>
                 </div>
             );
         }
-    };
-
-    const getStars = (rating) => {
-        const stars = [];
-        for (let i = 0; i < 5; i++) {
-            if (rating - 1 >= 0) {
-                stars.push(1);
-            } else if (rating - 0.5 >= 0) {
-                stars.push(0.5);
-            } else {
-                stars.push(0);
-            }
-            rating--;
-        }
-
-        return (
-            <div className="establishment-section-around-star">
-                {stars.map((element, indice) => {
-                    return (
-                        <img
-                            key={indice}
-                            className="establishment-section-star"
-                            src={
-                                element === 1
-                                    ? starIcon
-                                    : element === 0.5
-                                    ? halfStarIcon
-                                    : emptyStarIcon
-                            }
-                            alt={
-                                element === starIcon
-                                    ? "Star"
-                                    : element === halfStarIcon
-                                    ? "Half star"
-                                    : "No star"
-                            }
-                        />
-                    );
-                })}
-            </div>
-        );
     };
 
     return (
