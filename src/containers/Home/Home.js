@@ -21,7 +21,12 @@ const getBackgroundTopImage = () => {
     let dayInNumerals = testDay.getDay();
 
     //msgjs21 Supprimer ce if une fois qu'on aura les images pour chaque jour (donc 7 images en tout)
-    if (dayInNumerals === 2 || dayInNumerals === 3 || dayInNumerals === 4) {
+    if (
+        dayInNumerals === 2 ||
+        dayInNumerals === 3 ||
+        dayInNumerals === 4 ||
+        dayInNumerals === 5
+    ) {
         const dayInLetters = new Intl.DateTimeFormat("en-US", {
             weekday: "long",
         })

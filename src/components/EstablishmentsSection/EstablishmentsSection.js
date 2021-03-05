@@ -5,13 +5,10 @@ import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import vegOptionIcon from "../../assets/category_veg-options.svg";
-import veganIcon from "../../assets/category_vegan.svg";
-import vegetarianIcon from "../../assets/category_vegetarian.svg";
-import bAndBIcon from "../../assets/category_b-b.svg";
 import starIcon from "../../assets/Star.png";
 import emptyStarIcon from "../../assets/EmptyStar.png";
 import halfStarIcon from "../../assets/HalfStar.png";
+import GetEstablishmentTypeIcon from "../WithoutHtml/GetEstablishmentTypeIcon";
 
 const EstablishmentsSection = ({
     deviceScreen,
@@ -21,12 +18,12 @@ const EstablishmentsSection = ({
 }) => {
     const getEstblishmentCard = (indice) => {
         if (sectionDatas.length >= indice + 1) {
+            //console.log(`/reviews/${sectionDatas[indice].placeId}`);
             return (
                 <div className="establishment-section-establishment-card">
                     <Link
                         key={sectionDatas[indice].placeId}
-                        // to={`/offer/${offer._id}`}
-                        to={`/reviews`}
+                        to={`/reviews/${sectionDatas[indice].placeId}`}
                         target="_blank"
                         style={{
                             textDecoration: "none",
@@ -41,38 +38,17 @@ const EstablishmentsSection = ({
                     </Link>
 
                     <div className="establishment-section-establishment-type-and-name">
-                        {sectionDatas[indice].type === "veg-options" && (
-                            <img
-                                className="establishment-section-establishment-type-image"
-                                src={vegOptionIcon}
-                                alt="veg-options"
-                            />
-                        )}
-                        {sectionDatas[indice].type === "vegan" && (
-                            <img
-                                className="establishment-section-establishment-type-image"
-                                src={veganIcon}
-                                alt="vegan"
-                            />
-                        )}
-                        {sectionDatas[indice].type === "vegetarian" && (
-                            <img
-                                className="establishment-section-establishment-type-image"
-                                src={vegetarianIcon}
-                                alt="vegetarian"
-                            />
-                        )}
-                        {sectionDatas[indice].type === "B&B" && (
-                            <img
-                                className="establishment-section-establishment-type-image"
-                                src={bAndBIcon}
-                                alt="B&amp;B"
-                            />
-                        )}
+                        <img
+                            className="establishment-section-establishment-type-image"
+                            src={GetEstablishmentTypeIcon(
+                                sectionDatas[indice].type
+                            )}
+                            alt={sectionDatas[indice].type}
+                        />
                         <Link
                             key={sectionDatas[indice].placeId}
-                            // to={`/offer/${offer._id}`}
-                            to={`/reviews`}
+                            //to={`/reviews`}
+                            to={`/reviews/${sectionDatas[indice].placeId}`}
                             target="_blank"
                             style={{
                                 textDecoration: "none",

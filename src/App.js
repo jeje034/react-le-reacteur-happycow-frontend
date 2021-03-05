@@ -23,8 +23,15 @@ function App() {
                     <Elements stripe={stripePromise}>
                         <Payment baseUrl={baseUrl} token={token} />
                     </Elements>
-                </Route> */}
-                <Route path="/reviews">
+                </Route> 
+                <Route path="/reviews/:id">
+                    <Reviews />
+                </Route>
+                 <Route path="/reviews">
+                    <Reviews />
+                </Route>
+                */}
+                <Route path="/reviews/:id">
                     <Reviews />
                 </Route>
                 <Route path="/">

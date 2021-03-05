@@ -1,0 +1,72 @@
+$vegetarianColor: #8a2091;
+$veganColor: #21820d;
+$vegOptionsColor: #dc5d5c;
+$bAndBColor: #1e85a2;
+
+.review-title-and-more {
+    font-family: "Nunito";
+    color: white;
+    width: 100%;
+    padding: 0.75rem;
+    //Pas de hauteur, les titres courts seront sur une ligne et les titres longs sur 2 lignes, voir plus.
+}
+
+.review-vegan-background-color {
+    background-color: $veganColor;
+}
+.review-veg-options-background-color {
+    background-color: $vegOptionsColor;
+}
+.review-b-and-b-background-color {
+    background-color: $bAndBColor;
+}
+.review-vegetarian-background-color {
+    background-color: $vegetarianColor;
+}
+
+.reviews-h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 2.25rem;
+    text-align: center;
+}
+
+.reviews-under-h1 {
+    display: flex;
+}
+
+.review-establishment-type {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 0.375rem;
+    line-height: 1.6rem;
+    font-weight: 700;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    font-size: 0.75rem;
+}
+.review-vegan-color {
+    color: $veganColor;
+}
+.review-veg-options-color {
+    color: $vegOptionsColor;
+}
+.review-b-and-b-color {
+    color: $bAndBColor;
+}
+.review-vegetarian-color {
+    color: $vegetarianColor;
+}
+
+.review-establishment-type-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+}
+
+@media (min-width: 635px) {
+    .reviews-h1 {
+        text-align: left;
+    }
+}

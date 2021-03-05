@@ -1,3 +1,24 @@
+# Fonctionnalités
+
+Entièrement responsive.
+10 établissements peuvent défiler grâce à des boutons de défilement, sauf en affichage mobile. Le déplacement se fait en faisant glisser le doigt.
+Pour les affichages PC, le bouton pour défiler à droite se masque automatiquement lorsque l'on arrive au dernier établissement. De même, pour que le bouton de gauche s'affiche, il faut avoir fait au préalable cliquer sur le bouton de droite.
+Le bouton de droite peut aussi être masqué dès le départ si tous les établissements tiennent sur la page.
+C'est le cas des B&Bs.
+
+La photo en haut de la page d'accueil change chaque jour de la semaine. Ca fait 7 photos différentes en tout.
+
+Le détail d'un établissement, la couleur du bandeau du haut change en fonction du type d'établissement :
+
+-   violet pour les restaurants végétariens.
+-   vert pour les restaurants vegans.
+-   rouge pour les restaurants veg-options.
+-   turquoise pour les B&Bs.
+
+Sur cette même page, la ligne violette en bas du header n'est pas affichée.
+
+Faire en sorte que ce ne soit pas trop catastrophique si on saisit un /reviews/idInexistant
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
