@@ -1,6 +1,9 @@
 # Fonctionnalités
 
 Entièrement responsive.
+
+Les restaurants affichés sont prévus pour être les 10 restaurants les plus proches du navigateur affichant la page Web. Mais les données priviennent d'un fichier JSON. Et ce fichier contient uniquement des restaurants à Paris ou proche de Paris. J'ai donc fait comme si le navigateur se situait à Paris, juste en face de la cathédrale Notre Dame de Paris.
+
 10 établissements peuvent défiler grâce à des boutons de défilement, sauf en affichage mobile. Le déplacement se fait en faisant glisser le doigt.
 Pour les affichages PC, le bouton pour défiler à droite se masque automatiquement lorsque l'on arrive au dernier établissement. De même, pour que le bouton de gauche s'affiche, il faut avoir fait au préalable cliquer sur le bouton de droite.
 Le bouton de droite peut aussi être masqué dès le départ si tous les établissements tiennent sur la page.
@@ -17,7 +20,36 @@ Le détail d'un établissement, la couleur du bandeau du haut change en fonction
 
 Sur cette même page, la ligne violette en bas du header n'est pas affichée.
 
+Icone et texte "CLOSED NOW" en rouge si fermé
+Icone et texte "OPEN NOW" en vert si ouvert
+Les heures d'ouvertures ont été récupérées en parsant la description.
+En examinant les données, on peut conclure que les horaires d'ouverture se trouvent en fin de description. Il faut gérer ces différentes types de données :
+// ... Open Mon-Wed 11:00-23:00, Thu-Sat 11:00-02:00, Sun 11:00-23:00. (classique)
+// ... Open Mon-Fri 10:00-19:30, Sat 12:00-19:30. Closed Sun. (avec horaires de fermeture à ignorer)
+// ... Open Mon-Sun 12:00-14:30, 19:00-22:30. (avec un moins une tranche horaire sans jour => récupérer le jour de la tranche horaire précédente)
+// ... Open Tue-Thu 18:00-23:00, Fri 18:00-02:00, Sat 10:00-02:00, Sun 10:00-19:00. (avec horaire de fin le jour suivant (00:00, 01:00, 02:00, ...))
+//Parfois toutes les exceptions sont cumulées !
+
+Avoir si on fait
+Lorsque le restaurant est ouvert, la ligne sous "OPEN NOW" affiche :
+
+-   dans le cas où le restaurant ferme dans moins de 45 minutes : un texte en rouge indque qu'il va bientôt fermer. Ex: "Closes in 40 min".
+-   autrement : un texte en vert du style "until 10:00pm"
+
+Lorsque le restaurant est ouvert, la 2 ligne sous "OPEN NOW" affiche la plage horaire d'ouverture.
+
+React leaflet est utilisé pour les cartes.
+
 Faire en sorte que ce ne soit pas trop catastrophique si on saisit un /reviews/idInexistant
+
+Note 0
+<i class="fas fa-star"></i>
+
+Note 0.5
+<i class="fas fa-star-half-alt"></i>
+
+Note 1
+<i class="far fa-star"></i>
 
 # Getting Started with Create React App
 

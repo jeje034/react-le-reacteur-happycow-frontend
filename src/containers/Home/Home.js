@@ -25,7 +25,8 @@ const getBackgroundTopImage = () => {
         dayInNumerals === 2 ||
         dayInNumerals === 3 ||
         dayInNumerals === 4 ||
-        dayInNumerals === 5
+        dayInNumerals === 5 ||
+        dayInNumerals === 6
     ) {
         const dayInLetters = new Intl.DateTimeFormat("en-US", {
             weekday: "long",

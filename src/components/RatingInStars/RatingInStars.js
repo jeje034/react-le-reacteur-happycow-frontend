@@ -1,9 +1,5 @@
 import "./RatingInStars.scss";
 
-import starIcon from "../../assets/Star.png";
-import emptyStarIcon from "../../assets/EmptyStar.png";
-import halfStarIcon from "../../assets/HalfStar.png";
-
 const RatingInStars = ({ rating }) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
@@ -18,28 +14,27 @@ const RatingInStars = ({ rating }) => {
         rating--;
     }
 
+    const getFontAwesomeClasses = (rating) => {
+        if (rating === 1) {
+            return "fas fa-star";
+        } else if (rating === 0.5) {
+            return "fas fa-star-half-alt";
+        } else {
+            return "far fa-star";
+        }
+    };
+
     return (
         <div className="rating-in-stars-main">
             {stars.map((element, indice) => {
                 return (
-                    <img
+                    <i
                         key={indice}
-                        className="rating-in-stars-star"
-                        src={
-                            element === 1
-                                ? starIcon
-                                : element === 0.5
-                                ? halfStarIcon
-                                : emptyStarIcon
+                        className={
+                            "rating-in-stars-star " +
+                            getFontAwesomeClasses(element)
                         }
-                        alt={
-                            element === starIcon
-                                ? "Star"
-                                : element === halfStarIcon
-                                ? "Half star"
-                                : "No star"
-                        }
-                    />
+                    ></i>
                 );
             })}
         </div>

@@ -86,6 +86,67 @@ $bAndBColor: #1e85a2;
 .reviews-container {
     margin-left: 12px;
     margin-right: 12px;
+    font-family: "Nunito";
+}
+
+.reviews-description-and-more {
+    margin-top: 20px;
+}
+
+// .reviews-description-and-more-left-or-top {
+//     background-color: yellow;
+// }
+.reviews-hours-contact-adress {
+    display: block;
+    margin-bottom: 20px;
+}
+.reviews-hours-contact-adress svg {
+    width: 2rem;
+    margin-right: 15px;
+}
+.reviews-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+.reviews-hours-contact-adress-first-line {
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.reviews-color-open {
+    color: #2e7d32;
+}
+.reviews-color-closed {
+    color: #e53935;
+}
+.reviews-font-14px-500 {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.reviews-hours-with-icon {
+    display: flex;
+    align-items: flex-start;
+}
+
+.reviews-contact-with-icon {
+    display: flex;
+    align-items: flex-start;
+}
+.reviews-adress-with-icon {
+    display: flex;
+    align-items: flex-start;
+}
+
+.reviews-description {
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.reviews-description-and-more-right-or-bottom {
+    height: 450px;
+    background-color: grey;
 }
 
 @media (min-width: 576px) {
@@ -102,6 +163,20 @@ $bAndBColor: #1e85a2;
     }
 }
 
+@media (min-width: 768px) {
+    .reviews-description-and-more {
+        display: flex;
+    }
+
+    .reviews-description-and-more-left-or-top {
+        width: 58.333333%;
+        height: 450px;
+    }
+    .reviews-description-and-more-right-or-bottom {
+        width: 41.666667%;
+        height: 450px;
+    }
+}
 @media (min-width: 992px) {
     .review-title-and-more-for-justify {
         margin-left: 24px;
@@ -111,6 +186,20 @@ $bAndBColor: #1e85a2;
     .reviews-container {
         margin-left: 24px;
         margin-right: 24px;
+    }
+    .reviews-description-and-more-left-or-top {
+        width: 66.666667%;
+    }
+    .reviews-hours-contact-adress {
+        display: flex;
+        justify-content: space-between;
+    }
+    .reviews-hours-contact-adress > div {
+        width: 33%;
+    }
+
+    .reviews-description-and-more-right-or-bottom {
+        width: 33.333333%;
     }
 }
 
