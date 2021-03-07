@@ -38,18 +38,13 @@ Lorsque le restaurant est ouvert, la ligne sous "OPEN NOW" affiche :
 
 Lorsque le restaurant est ouvert, la 2 ligne sous "OPEN NOW" affiche la plage horaire d'ouverture.
 
-React leaflet est utilisé pour les cartes.
+Le package react-leaflet est utilisé pour les cartes OpenStreetMap.
+
+Dans la page de détail de l'établissement, un clic sur la position de l'établissement ouvre une nouvelle page Web avec Google Map centré sur cet établissement.
+
+-------------à faire ------https://www.google.com/maps?q=48.852563,2.347130---------
 
 Faire en sorte que ce ne soit pas trop catastrophique si on saisit un /reviews/idInexistant
-
-Note 0
-<i class="fas fa-star"></i>
-
-Note 0.5
-<i class="fas fa-star-half-alt"></i>
-
-Note 1
-<i class="far fa-star"></i>
 
 # Getting Started with Create React App
 

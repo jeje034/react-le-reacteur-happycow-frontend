@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import GetOpeningHoursInformations from "../../functions/GetOpeningHoursInformations";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import GetEstablishmentTypeIcon from "../../functions/GetEstablishmentTypeIcon";
 import establishments from "../../assets/establishments.json";
@@ -214,7 +215,35 @@ const Reviews = () => {
                     </div>
 
                     {/* A droite pour les grands écrans, en bas pour les petits. */}
-                    <div className="reviews-description-and-more-right-or-bottom"></div>
+                    <div className="reviews-description-and-more-right-or-bottom">
+                        {/* Réalisé grâce à https://react-leaflet.js.org/docs/start-installation et https://blog.logrocket.com/how-to-use-react-leaflet/
+                         */}
+                        {establishment.location &&
+                            establishment.location.lat &&
+                            establishment.location.lng && (
+                                <MapContainer
+                                    center={[
+                                        establishment.location.lat,
+                                        establishment.location.lng,
+                                    ]}
+                                    zoom={16}
+                                    scrollWheelZoom={false}
+                                >
+                                    <TileLayer
+                                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    />
+                                    <Marker
+                                        position={[
+                                            establishment.location.lat,
+                                            establishment.location.lng,
+                                        ]}
+                                    >
+                                        <Popup>{establishment.name}</Popup>
+                                    </Marker>
+                                </MapContainer>
+                            )}
+                    </div>
                 </div>
             </div>
         </>
