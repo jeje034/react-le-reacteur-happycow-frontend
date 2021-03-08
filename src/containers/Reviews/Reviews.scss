@@ -145,13 +145,75 @@ $bAndBColor: #1e85a2;
 }
 
 .reviews-description-and-more-right-or-bottom {
-    height: 450px;
+    margin-left: 0px;
     //background-color: grey;
+}
+
+.reviews-around-map {
+    height: 228px;
 }
 
 .leaflet-container {
     width: 100%;
-    height: 450px;
+    height: 100%;
+}
+
+.reviews-informations-under-map {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 25px;
+    padding-bottom: 6px;
+    background-color: #fafafa;
+    //background-color: grey;
+}
+
+.reviews-informations-under-map a {
+    text-decoration: none;
+    display: flex;
+}
+
+.reviews-information-under-map {
+    display: flex;
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 10px;
+}
+
+.reviews-information-under-map-title {
+    font-weight: 700;
+    width: 68px;
+}
+
+.reviews-information-under-map-value {
+    font-weight: 500;
+    color: rgb(144, 105, 205);
+    overflow: hidden;
+}
+
+.reviews-around-dollar {
+    display: flex;
+    //border: #21820d 2px solid;
+}
+
+.reviews-dollar-icon {
+    width: 10.83px;
+    height: 20px;
+    color: rgb(255, 204, 0);
+    margin-right: 4px;
+}
+
+.reviews-dollar-icon-yellow {
+    color: rgb(255, 204, 0);
+}
+
+.reviews-dollar-icon-grey {
+    color: rgb(158, 158, 158);
+}
+
+.reviews-facebook-icon {
+    width: 11.53px;
+    height: 20px;
+    margin-right: 4px;
 }
 
 @media (min-width: 576px) {
@@ -179,6 +241,7 @@ $bAndBColor: #1e85a2;
     }
     .reviews-description-and-more-right-or-bottom {
         width: 41.666667%;
+        margin-left: 20px;
         height: 450px;
     }
 }

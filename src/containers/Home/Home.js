@@ -22,6 +22,7 @@ const getBackgroundTopImage = () => {
 
     //msgjs21 Supprimer ce if une fois qu'on aura les images pour chaque jour (donc 7 images en tout)
     if (
+        dayInNumerals === 1 ||
         dayInNumerals === 2 ||
         dayInNumerals === 3 ||
         dayInNumerals === 4 ||
@@ -197,6 +198,9 @@ const Home = () => {
         const getDatasForDebug = () => {
             let localEstablishmentsTypes = [];
             let localCategories = [];
+            let prices = [];
+            let websites = [];
+            let facebooks = [];
 
             for (let i = 0; i < establishments.length; i++) {
                 const establishment = establishments[i];
@@ -210,10 +214,23 @@ const Home = () => {
                 if (localCategories.indexOf(establishment.category) === -1) {
                     localCategories.push(establishment.category);
                 }
+
+                if (prices.indexOf(establishment.price) === -1) {
+                    prices.push(establishment.price);
+                }
+                if (websites.indexOf(establishment.website) === -1) {
+                    websites.push(establishment.website);
+                }
+                if (facebooks.indexOf(establishment.facebook) === -1) {
+                    facebooks.push(establishment.facebook);
+                }
             }
 
-            console.log(localEstablishmentsTypes);
-            console.log(localCategories);
+            //console.log(localEstablishmentsTypes);
+            //console.log(localCategories);
+            //console.log("prices:", prices);
+            //console.log("facebooks:", facebooks);
+            //console.log("websites:", websites)
 
             setEstablishmentsTypesForDebug(localEstablishmentsTypes);
         };
