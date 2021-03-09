@@ -1,16 +1,15 @@
 import "./Reviews.scss";
 
 import { useState, useEffect } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import { useParams } from "react-router-dom";
-import { divIcon } from "leaflet";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 
 import GetOpeningHoursInformations from "../../functions/GetOpeningHoursInformations";
 
 import GetEstablishmentTypeIcon from "../../functions/GetEstablishmentTypeIcon";
 import establishments from "../../assets/establishments.json";
 import RatingInStars from "../../components/RatingInStars/RatingInStars";
+import CustomMapMarker from "../../components/CustomMapMarker/CustomMapMarker";
 
 const getBannerClasses = (establishmentType) => {
     let className = "review-title-and-more";
@@ -139,31 +138,6 @@ const Reviews = () => {
 
         fetchData();
     }, [id]);
-
-    const iconMarkup = renderToStaticMarkup(
-        <svg>
-            <g>
-                <path
-                    d="M9.676 42.879c0-1.263 3.732-2.284 8.332-2.284 4.601 0 8.333 1.021 8.333 2.284s-3.732 2.284-8.333 2.284-8.332-1.021-8.332-2.284"
-                    fillOpacity="0.30"
-                    fill="#030404"
-                />
-                <path
-                    d="M35.681 17.758c0-9.805-7.913-17.758-17.673-17.758-9.759 0-17.673 7.953-17.673 17.758 0 8.849 6.437 16.183 14.859 17.538l3.07 8.853 2.688-8.877c8.357-1.409 14.729-8.711 14.729-17.514"
-                    fill="#DC5D5C"
-                />
-                <path
-                    d="M15.671 29.232s-4.641-15.644 8.045-22.399l.164.321c.988 1.97 1.668 4.156 1.924 6.343.17 1.519.118 3.076-.3 4.556-.518 1.833-2.095 2.71-3.712 3.535-.471.236-.962.432-1.44.655-.89.412-1.793.929-2.167 1.879 0 0-.098-1.525 2.559-4.811 0 0 1.865-1.872 1.793-5.472 0 0-6.094 1.748-6.866 15.395"
-                    fill="#FEFEFE"
-                />
-            </g>
-        </svg>
-    );
-    const customMarkerIcon = divIcon({
-        html: iconMarkup,
-        iconAnchor: [18, 44], //Pour que ce soit centré sur la pointe de la flèche
-        iconSize: [0, 0], //Pour masquer le petit carré blanc en haut à gauche
-    });
 
     return (
         <>
@@ -328,15 +302,9 @@ const Reviews = () => {
                                             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                         />
-                                        <Marker
-                                            position={[
-                                                establishment.location.lat,
-                                                establishment.location.lng,
-                                            ]}
-                                            icon={customMarkerIcon}
-                                        >
-                                            <Popup>{establishment.name}</Popup>
-                                        </Marker>
+                                        <CustomMapMarker
+                                            establishment={establishment}
+                                        ></CustomMapMarker>
                                     </MapContainer>
                                 )}
                         </div>

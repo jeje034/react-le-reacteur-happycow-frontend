@@ -39,9 +39,9 @@ Lorsque le restaurant est ouvert, la ligne sous "OPEN NOW" affiche :
 Lorsque le restaurant est ouvert, la 2 ligne sous "OPEN NOW" affiche la plage horaire d'ouverture.
 
 Le package react-leaflet est utilisé pour les cartes OpenStreetMap.
-La largeur dépend de la taille de l'écran. -----Parfois, la hauteur fait 60% de la largeur.
+La largeur dépend de la taille de l'écran.
 
-Dans la page de détail de l'établissement, un clic sur la position de l'établissement ouvre une nouvelle page Web avec Google Map centré sur cet établissement.
+Dans la page de détail de l'établissement, un clic sur la position de l'établissement ouvre une nouvelle page Web avec Google Map centré sur cet établissement. Les marqueurs indiquant la position du restaurant sont personnalisés. Il sont différents en fonction du Type d'établissement. Par exemple, la marqueur pour les établissements vegan est vert, le marqueur pour les B&Bs est bleu, ...
 
 Les restaurants peu chers (Inexpensive) ont un dollar jaune, 2 dollar gris. Les établissement moyennement chers (Moderate) ont 2 dollars gris et un dollar jaune. Les établissements chers ont 3 dollars jaunes. Sauf que dans le fichier JSON, on trouve seulement 2 valeurs pour le champs price : "Inexpensive" ou null; C'est pour cela que null a été considéré comme "Moderate". C'est le cas de "Loulou Friendly Diner", le 8e restaurant affiché.
 Il n'y a pas de dollar sur les B&Bs.
