@@ -94,13 +94,13 @@ const EstablishmentsSection = ({
         <section className="establishment-container-x-columns">
             <h2 className="establishment-section-h2">{sectionTitle}</h2>
             <Carousel
-                swipeable={deviceScreen === "mobile"} //Peut-on le faire défiler à la main ?
+                swipeable={deviceScreen === "mobile"} //Mettre true pour autoriserle défilement à la main.
                 draggable={false}
                 showDots={false} //Pour masquer les petits points (dots dans le doc) en bas permettant de savoir sur quelle "page on est" et aussi de se déplacer
                 responsive={responsive}
                 ssr={true} // means to render carousel on server-side.
                 infinite={false}
-                autoPlay={false} //msgjs21 this.props.deviceType !== "mobile" ? true : false
+                autoPlay={false} //Dans l'exemple sur npm, il y avait : this.props.deviceType !== "mobile" ? true : false
                 autoPlaySpeed={1000}
                 keyBoardControl={true}
                 customTransition={
@@ -115,9 +115,9 @@ const EstablishmentsSection = ({
                     responsive[deviceScreen]["items"] >= 2 &&
                     sectionDatas.length > responsive[deviceScreen]["items"]
                 }
-                deviceType={deviceScreen} //msgjs21 {this.props.deviceType}
+                deviceType={deviceScreen} //Dans l'exemple sur npm, il y avait : {this.props.deviceType}
                 dotListClass="custom-dot-list-style"
-                itemClass="carousel-item-padding-40-px"
+                itemClass="" //Dans l'exemple sur npm, il y avait : carousel-item-padding-40-px
             >
                 {getEstblishmentCard(0)}
                 {getEstblishmentCard(1)}

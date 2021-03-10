@@ -2,7 +2,7 @@
 
 Entièrement responsive.
 
-Les restaurants affichés sont prévus pour être les 10 restaurants les plus proches du navigateur affichant la page Web. Mais les données priviennent d'un fichier JSON. Et ce fichier contient uniquement des restaurants à Paris ou proche de Paris. J'ai donc fait comme si le navigateur se situait à Paris, juste en face de la cathédrale Notre Dame de Paris.
+Les restaurants affichés sont prévus pour être les 10 restaurants les plus proches du navigateur affichant la page Web. Mais les données proviennent d'un fichier JSON. Et ce fichier contient uniquement des restaurants à Paris ou proche de Paris. J'ai donc fait comme si le navigateur se situait à Paris, juste en face de la cathédrale Notre Dame de Paris.
 
 10 établissements peuvent défiler grâce à des boutons de défilement, sauf en affichage mobile. Le déplacement se fait en faisant glisser le doigt.
 Pour les affichages PC, le bouton pour défiler à droite se masque automatiquement lorsque l'on arrive au dernier établissement. De même, pour que le bouton de gauche s'affiche, il faut avoir fait au préalable cliquer sur le bouton de droite.
@@ -41,12 +41,11 @@ Lorsque le restaurant est ouvert, la 2 ligne sous "OPEN NOW" affiche la plage ho
 Le package react-leaflet est utilisé pour les cartes OpenStreetMap.
 La largeur dépend de la taille de l'écran.
 
-Dans la page de détail de l'établissement, un clic sur la position de l'établissement ouvre une nouvelle page Web avec Google Map centré sur cet établissement. Les marqueurs indiquant la position du restaurant sont personnalisés. Il sont différents en fonction du Type d'établissement. Par exemple, la marqueur pour les établissements vegan est vert, le marqueur pour les B&Bs est bleu, ...
+Dans la page de détail de l'établissement, un clic sur la position de l'établissement ouvre une nouvelle page Web avec Google Map centré sur cet établissement. Les marqueurs indiquant la position du restaurant sont personnalisés. Ils sont différents en fonction du type d'établissement. Par exemple, la marqueur pour les établissements vegan est vert, le marqueur pour les B&Bs est bleu, ...
+En cliquant sur le marqueur, un lien s'affiche. Il permet d'ouvrir un nouvel onglet du navigateur avec une carte Google Map centrée sur l'établissement.
 
 Les restaurants peu chers (Inexpensive) ont un dollar jaune, 2 dollar gris. Les établissement moyennement chers (Moderate) ont 2 dollars gris et un dollar jaune. Les établissements chers ont 3 dollars jaunes. Sauf que dans le fichier JSON, on trouve seulement 2 valeurs pour le champs price : "Inexpensive" ou null; C'est pour cela que null a été considéré comme "Moderate". C'est le cas de "Loulou Friendly Diner", le 8e restaurant affiché.
 Il n'y a pas de dollar sur les B&Bs.
-
--------------à faire ------ un clic sur l'image envoi vers google maps https://www.google.com/maps?q=48.852563,2.347130---------
 
 Le rectangle est plus grand lorsque facebook est null
 Resto avec facebook + site web et dans les 10 de mon site : https://www.happycow.net/reviews/shakespeare-and-company-cafe-paris-80718

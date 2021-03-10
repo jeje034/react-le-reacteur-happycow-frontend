@@ -93,9 +93,9 @@ $bAndBColor: #1e85a2;
     margin-top: 20px;
 }
 
-// .reviews-description-and-more-left-or-top {
-//     background-color: yellow;
-// }
+.reviews-description-and-more-left-or-top {
+    margin-bottom: 20px;
+}
 .reviews-hours-contact-adress {
     display: block;
     margin-bottom: 20px;
@@ -142,6 +142,7 @@ $bAndBColor: #1e85a2;
 .reviews-description {
     line-height: 24px;
     font-weight: 500;
+    margin-bottom: 20px;
 }
 
 .reviews-description-and-more-right-or-bottom {
@@ -214,6 +215,24 @@ $bAndBColor: #1e85a2;
     width: 11.53px;
     height: 20px;
     margin-right: 4px;
+}
+
+.reviews-around-caroussel {
+    width: 100%;
+    height: 262px;
+    margin-left: -12px;
+    //background-color: gray;
+}
+.reviews-carousel-item {
+    margin-left: 12px;
+    margin-right: 12px;
+    height: 262px;
+}
+.reviews-carousel-picture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
 }
 
 @media (min-width: 576px) {

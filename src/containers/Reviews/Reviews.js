@@ -3,6 +3,9 @@ import "./Reviews.scss";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { MapContainer, TileLayer } from "react-leaflet";
+import { useMediaQuery } from "react-responsive";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 import GetOpeningHoursInformations from "../../functions/GetOpeningHoursInformations";
 
@@ -138,6 +141,39 @@ const Reviews = () => {
 
         fetchData();
     }, [id]);
+
+    const isMobile = useMediaQuery({ maxWidth: 767 });
+    const mayDisplay2Cards = useMediaQuery({ maxWidth: 992 });
+    let deviceScreen;
+
+    if (isMobile) {
+        deviceScreen = "mobile";
+    } else if (mayDisplay2Cards) {
+        deviceScreen = "twoCards";
+    } else {
+        deviceScreen = "threeCards";
+    }
+
+    //992 et plus : 3 établissements par ligne
+    //768 -> 992 : 2 établissements entiers par ligne
+    //0 -> 767 : 1.x établissements par ligne
+    const responsive = {
+        threeCards: {
+            breakpoint: { max: 3000, min: 992 },
+            items: 3,
+            //slidesToSlide: 2, // optional, default to 1.
+        },
+        twoCards: {
+            breakpoint: { max: 992, min: 767 },
+            items: 2,
+            //slidesToSlide: 2, // optional, default to 1.
+        },
+        mobile: {
+            breakpoint: { max: 767, min: 0 },
+            items: 1.3,
+            slidesToSlide: 1, // optional, default to 1.
+        },
+    };
 
     return (
         <>
@@ -278,6 +314,62 @@ const Reviews = () => {
 
                         <div className="reviews-description">
                             {establishment.description}
+                        </div>
+
+                        <div className="reviews-around-caroussel">
+                            {establishment.pictures &&
+                                establishment.pictures.length > 0 && (
+                                    <Carousel
+                                        swipeable={deviceScreen === "mobile"} //Mettre true pour autoriserle défilement à la main.
+                                        draggable={false}
+                                        showDots={false} //Pour masquer les petits points (dots dans le doc) en bas permettant de savoir sur quelle "page on est" et aussi de se déplacer
+                                        responsive={responsive}
+                                        ssr={true} // means to render carousel on server-side.
+                                        infinite={false}
+                                        autoPlay={false} //Dans l'exemple sur npm, il y avait : this.props.deviceType !== "mobile" ? true : false
+                                        autoPlaySpeed={1000}
+                                        keyBoardControl={true}
+                                        customTransition={
+                                            deviceScreen === "mobile"
+                                                ? "none 0"
+                                                : "transform 200ms ease-in-out"
+                                        } //"none 0" //"all .5"
+                                        transitionDuration={200} //{deviceScreen === "mobile" ? 0 : 300}
+                                        containerClass="carousel-container"
+                                        removeArrowOnDeviceType={["mobile"]}
+                                        arrows={
+                                            responsive[deviceScreen]["items"] >=
+                                                2 &&
+                                            establishment.pictures.length >
+                                                responsive[deviceScreen][
+                                                    "items"
+                                                ]
+                                        }
+                                        deviceType={deviceScreen} //Dans l'exemple sur npm, il y avait : {this.props.deviceType}
+                                        dotListClass="custom-dot-list-style"
+                                        itemClass="" //Dans l'exemple sur npm, il y avait : carousel-item-padding-40-px
+                                    >
+                                        {establishment.pictures.map(
+                                            (picture, index) => {
+                                                //
+                                                return (
+                                                    <div
+                                                        className="reviews-carousel-item"
+                                                        key={index}
+                                                    >
+                                                        <img
+                                                            className="reviews-carousel-picture"
+                                                            alt={
+                                                                establishment.name
+                                                            }
+                                                            src={picture}
+                                                        ></img>
+                                                    </div>
+                                                );
+                                            }
+                                        )}
+                                    </Carousel>
+                                )}
                         </div>
                     </div>
 

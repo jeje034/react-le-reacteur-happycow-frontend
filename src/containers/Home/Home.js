@@ -14,7 +14,7 @@ import EstablishmentsSection from "../../components/EstablishmentsSection/Establ
 //768 -> 992 : 2 établissements entiers par ligne
 //0 -> 767 : 1.x établissements par ligne
 
-const useRealGpsCoordinates = false; //msgjs21 indiquer dans le readme.md qu'on prend les coordonnées de paris pour avoir des données
+const useRealGpsCoordinates = false;
 
 const getBackgroundTopImage = () => {
     const testDay = new Date();
