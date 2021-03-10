@@ -46,7 +46,6 @@ const EstablishmentsSection = ({
                         />
                         <Link
                             key={sectionDatas[indice].placeId}
-                            //to={`/reviews`}
                             to={`/reviews/${sectionDatas[indice].placeId}`}
                             target="_blank"
                             style={{
@@ -81,7 +80,18 @@ const EstablishmentsSection = ({
         <section className="establishment-container-x-columns">
             <div className="establishment-section-first-line">
                 <h2 className="establishment-section-h2">{sectionTitle}</h2>
-                {searchMapLink && <span>{"View all >"}</span>}
+                {searchMapLink && (
+                    <Link
+                        to={"/searchmap"}
+                        style={{
+                            textDecoration: "none",
+                        }}
+                    >
+                        <div className="establishments-section-search-map-link">
+                            {"View all >"}
+                        </div>
+                    </Link>
+                )}
             </div>
 
             <Carousel

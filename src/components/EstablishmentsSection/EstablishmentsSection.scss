@@ -5,17 +5,30 @@
 .establishment-section-first-line {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-top: -80px;
+    margin-bottom: 40px;
+    margin-right: 24px;
+    //background-color: pink;
 }
 
+//margin-top: -80px;
+//margin-bottom: 40px;
 .establishment-section-h2 {
     font-size: 30px;
     color: #444444;
-    margin-top: -80px;
     font-family: "Nunito";
     font-weight: 800;
-    margin-bottom: 40px;
     // background-color: #4caf50;
     // border: 3px solid red;
+}
+
+.establishments-section-search-map-link {
+    font-size: 16px;
+    font-family: "Nunito";
+    font-weight: 700;
+    line-height: 24px;
+    color: rgb(124, 78, 196);
 }
 
 .establishment-section-establishment-card {
@@ -91,7 +104,7 @@
         margin: 0 auto;
         // background-color: yellow;
     }
-    .establishment-section-h2 {
+    .establishment-section-first-line {
         margin-top: -95px;
         margin-bottom: 40px;
     }
@@ -113,7 +126,7 @@
         margin: 0 auto;
         // background-color: red;
     }
-    .establishment-section-h2 {
+    .establishment-section-first-line {
         margin-top: -95px;
         margin-bottom: 40px;
     }
@@ -132,10 +145,14 @@
         margin: 0 auto;
         // background-color: green;
     }
-    .establishment-section-h2 {
+    .establishment-section-first-line {
         margin-top: -95px;
         margin-bottom: 40px;
     }
+    // .establishment-section-h2 {
+    //     margin-top: -95px;
+    //     margin-bottom: 40px;
+    // }
     .establishment-section-establishment-card {
         width: 270px;
         height: 335px;

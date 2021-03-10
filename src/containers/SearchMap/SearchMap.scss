@@ -1,0 +1,18 @@
+.search-map-main {
+    display: flex;
+}
+
+.search-map-left {
+    width: 50%;
+    height: 3000px;
+    background-color: pink;
+    overflow: scroll;
+    font-size: 50px;
+}
+
+.search-map-right {
+    width: 50%;
+    height: 500px;
+    background-color: grey;
+    overflow: -moz-hidden-unscrollable;
+}

@@ -172,11 +172,9 @@ const Home = () => {
                 ) {
                     restaurantsNearMe.push(establishment);
                     restaurantsCounter++;
-                    console.log(establishment.link, establishment.address);
                 } else if (bAndBsCounter < 10 && establishment.type === "B&B") {
                     bAndBsNearMe.push(establishment);
                     bAndBsCounter++; //Comme j'ai seulement 2 B&Bs dans ma base, je ne fais pas d'algo spécial pour les sélectionner.
-                    console.log(establishment.link, establishment.address);
                 }
 
                 if (restaurantsCounter === 10 && bAndBsCounter === 10) {
@@ -353,7 +351,10 @@ const Home = () => {
                                 responsive={responsive}
                                 sectionDatas={veganFoodNearMeArray}
                                 sectionTitle="Vegan Food Near Me"
-                                searchMapLink={true}
+                                searchMapLink={
+                                    deviceScreen !== "mobile" &&
+                                    deviceScreen !== "twoCards"
+                                }
                             />
                         }
                     </div>
