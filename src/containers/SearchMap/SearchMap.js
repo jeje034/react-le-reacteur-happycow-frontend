@@ -2,21 +2,17 @@ import "./SearchMap.scss";
 
 const SearchMap = () => {
     return (
-        <div className="search-map-main">
+        <div className="search-map-container">
             <div className="search-map-left">
-                lorem comment ? lorem comment ? lorem comment ? lorem comment ?
-                lorem comment ? lorem comment ? lorem comment ? lorem comment ?
-                lorem comment ? lorem comment ? lorem comment ? lorem comment ?
-                lorem comment ? lorem comment ?lorem comment ? lorem comment ?
-                lorem comment ? lorem comment ? lorem comment ? lorem comment ?
-                lorem comment ?lorem comment ? lorem comment ? lorem comment ?
-                lorem comment ? lorem comment ? lorem comment ? lorem comment
-                ?lorem comment ? lorem comment ? lorem comment ? lorem comment ?
-                lorem comment ? lorem comment ? lorem comment ?lorem comment ?
-                lorem comment ? lorem comment ? lorem comment ? lorem comment ?
-                lorem comment ? lorem comment ?lorem comment ? lorem comment ?
-                lorem comment ? lorem comment ? lorem comment ? lorem comment ?
-                lorem comment ?
+                <div>Resto 1</div>
+                <div>Resto 2</div>
+                <div>Resto 3</div>
+                <div>Resto 4</div>
+                <div>Resto 5</div>
+                <div>Resto 6</div>
+                <div>Resto 7</div>
+                <div>Resto 8</div>
+                <div>Resto 9</div>
             </div>
             <div className="search-map-right"></div>
         </div>
