@@ -43,42 +43,37 @@ const getBackgroundTopImage = () => {
 
 const Home = () => {
     console.log("deb home");
-    const [gpsCoordinates, setgpsCoordinates] = useState();
     const [veganFoodNearMeArray, setVeganFoodNearMeArray] = useState([]);
     const [bAndBsNearMeArray, setBAndBsNearMeArray] = useState([]);
-    const [
-        establishmentsTypesForDebug,
-        setEstablishmentsTypesForDebug,
-    ] = useState([]);
     const [
         isDownloadingVeganFoodNearMe,
         setIsDownloadingVeganFoodNearMe,
     ] = useState(true);
 
-    const getDistanceFromBrowserForDebug = (latitude, longitude) => {
-        if (
-            !gpsCoordinates ||
-            !gpsCoordinates.latitude ||
-            !gpsCoordinates.longitude
-        ) {
-            return gpsCoordinates.longitude;
-        }
+    // const getDistanceFromBrowserForDebug = (latitude, longitude) => {
+    //     if (
+    //         !gpsCoordinates ||
+    //         !gpsCoordinates.latitude ||
+    //         !gpsCoordinates.longitude
+    //     ) {
+    //         return gpsCoordinates.longitude;
+    //     }
 
-        let lat1 = gpsCoordinates.latitude;
-        let lon1 = gpsCoordinates.longitude;
+    //     let lat1 = gpsCoordinates.latitude;
+    //     let lon1 = gpsCoordinates.longitude;
 
-        //https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
+    //     //https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
 
-        var p = 0.017453292519943295; // Math.PI / 180
-        var c = Math.cos;
-        var a =
-            0.5 -
-            c((latitude - lat1) * p) / 2 +
-            (c(lat1 * p) * c(latitude * p) * (1 - c((longitude - lon1) * p))) /
-                2;
+    //     var p = 0.017453292519943295; // Math.PI / 180
+    //     var c = Math.cos;
+    //     var a =
+    //         0.5 -
+    //         c((latitude - lat1) * p) / 2 +
+    //         (c(lat1 * p) * c(latitude * p) * (1 - c((longitude - lon1) * p))) /
+    //             2;
 
-        return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-    };
+    //     return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+    // };
 
     useEffect(() => {
         let localGpsCoordinates;
@@ -109,16 +104,12 @@ const Home = () => {
                 }
             }
 
-            if (gpsCoordinatesFound) {
-                setgpsCoordinates(localGpsCoordinates);
-            } else {
+            if (!gpsCoordinatesFound) {
                 //Si on n'a pas de coordonnées, on prend celles de la rue de la citée, 75 004 Paris (en face de la cathédrale Notre Dame de Paris).
                 localGpsCoordinates = {
                     latitude: 48.85384469500249,
                     longitude: 2.347264296359486,
                 };
-
-                setgpsCoordinates(localGpsCoordinates);
             }
         };
 
@@ -181,10 +172,11 @@ const Home = () => {
                 ) {
                     restaurantsNearMe.push(establishment);
                     restaurantsCounter++;
-                }
-                if (bAndBsCounter < 10 && establishment.type === "B&B") {
+                    console.log(establishment.link, establishment.address);
+                } else if (bAndBsCounter < 10 && establishment.type === "B&B") {
                     bAndBsNearMe.push(establishment);
                     bAndBsCounter++; //Comme j'ai seulement 2 B&Bs dans ma base, je ne fais pas d'algo spécial pour les sélectionner.
+                    console.log(establishment.link, establishment.address);
                 }
 
                 if (restaurantsCounter === 10 && bAndBsCounter === 10) {
@@ -196,11 +188,22 @@ const Home = () => {
         };
 
         const getDatasForDebug = () => {
+            const today = new Date();
+            if (
+                today.getFullYear() !== 2021 ||
+                today.getMonth() !== 2 ||
+                today.getDate() !== 10
+            ) {
+                return;
+            }
+
             let localEstablishmentsTypes = [];
             let localCategories = [];
             let prices = [];
             let websites = [];
             let facebooks = [];
+            // let notInFrance = 0;
+            // let inFrance = 0;
 
             for (let i = 0; i < establishments.length; i++) {
                 const establishment = establishments[i];
@@ -224,15 +227,22 @@ const Home = () => {
                 if (facebooks.indexOf(establishment.facebook) === -1) {
                     facebooks.push(establishment.facebook);
                 }
-            }
+                //Impossible de récupérer la ville à partir du champ link car on peut
+                //avoir des tirets à la fois dans le nom de la ville et dans le nom de l'établissement
 
+                //On ne peut pas toujours récupérer les villes à partir des adresses, notamment car elles sont parfois tronquées
+                // if (establishment.address.indexOf(", France") === -1) {
+                //     console.log(establishment.address);
+                //     notInFrance++;
+                // } else {
+                //     inFrance++;
+                // }
+            }
             //console.log(localEstablishmentsTypes);
             //console.log(localCategories);
             //console.log("prices:", prices);
             //console.log("facebooks:", facebooks);
             //console.log("websites:", websites)
-
-            setEstablishmentsTypesForDebug(localEstablishmentsTypes);
         };
 
         const fetchData = () => {
@@ -343,6 +353,7 @@ const Home = () => {
                                 responsive={responsive}
                                 sectionDatas={veganFoodNearMeArray}
                                 sectionTitle="Vegan Food Near Me"
+                                searchMapLink={true}
                             />
                         }
                     </div>
@@ -355,18 +366,6 @@ const Home = () => {
                             sectionTitle="B&amp;Bs"
                         />
                     }
-                    {establishmentsTypesForDebug.map((type, index) => {
-                        return (
-                            <div key={index}>{"" + index + " : " + type}</div>
-                        );
-                    })}
-                    <div>{bAndBsNearMeArray[0].name}</div>
-                    <div>
-                        {getDistanceFromBrowserForDebug(
-                            bAndBsNearMeArray[0].location.lat,
-                            bAndBsNearMeArray[0].location.lng
-                        ).toFixed(1) + " km"}
-                    </div>
                 </>
             )}
         </div>

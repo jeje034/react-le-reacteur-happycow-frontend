@@ -2,6 +2,11 @@
     margin: 0 0 0 12px; //La marge gauche sert pour les mobiles
 }
 
+.establishment-section-first-line {
+    display: flex;
+    justify-content: space-between;
+}
+
 .establishment-section-h2 {
     font-size: 30px;
     color: #444444;

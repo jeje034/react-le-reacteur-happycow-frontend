@@ -13,6 +13,7 @@ const EstablishmentsSection = ({
     responsive,
     sectionDatas,
     sectionTitle,
+    searchMapLink,
 }) => {
     const getEstblishmentCard = (indice) => {
         if (sectionDatas.length >= indice + 1) {
@@ -63,22 +64,8 @@ const EstablishmentsSection = ({
                             </div>
                         </Link>
                     </div>
-                    {/*
-                    Le Caboulot de la Se…
-                    Les Demoiselles de M…                    
-                    Green Lab - Comédie
-
-                     */}
-                    {/*
-     Récupérer à partir d'adresse semble délicat
-     "9 Rue Quincampoix (at 4t…rondissement), Paris, …"
-     "31 rue Vieille du Temple, Paris, France, 75004"
-     "22, Rue des Ecouffes, Paris, France, 75004"
-
-     => à partir de coorodnnées
-      */}
                     <div className="establishment-section-adress">
-                        Ville, Pays
+                        Paris, France
                     </div>
 
                     <div className="establishment-section-around-star">
@@ -92,7 +79,11 @@ const EstablishmentsSection = ({
 
     return (
         <section className="establishment-container-x-columns">
-            <h2 className="establishment-section-h2">{sectionTitle}</h2>
+            <div className="establishment-section-first-line">
+                <h2 className="establishment-section-h2">{sectionTitle}</h2>
+                {searchMapLink && <span>{"View all >"}</span>}
+            </div>
+
             <Carousel
                 swipeable={deviceScreen === "mobile"} //Mettre true pour autoriserle défilement à la main.
                 draggable={false}

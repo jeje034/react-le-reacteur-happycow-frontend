@@ -53,7 +53,7 @@ Resto sans facebook avec site web https://www.happycow.net/reviews/vegethalles-p
 Etablissement (percing) avec facebook sans site (=> facebook est présenté çà droite du texte Website) : https://www.happycow.net/reviews/aenima-tattoo-paris-120030
 Resto sans facebook sans site
 
-Faire en sorte que ce ne soit pas trop catastrophique si on saisit un /reviews/idInexistant
+En cliquant sur le bouton "View-all", on accède à une page de recherche des restaurants avec des critères. Pour les écrans de 992 pixels et plus, une carte est affichée.
 
 # Getting Started with Create React App
 
