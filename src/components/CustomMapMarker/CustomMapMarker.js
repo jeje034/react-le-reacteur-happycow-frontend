@@ -1,8 +1,10 @@
+import "./CustomMapMarker.scss";
+
 import { renderToStaticMarkup } from "react-dom/server";
 import { divIcon } from "leaflet";
-import { Marker, Popup } from "react-leaflet";
+import { Marker, Popup, Tooltip } from "react-leaflet";
 
-const CustomMapMarker = ({ establishment }) => {
+const CustomMapMarker = ({ establishment, withTooltip }) => {
     const getVegOptionsIconMarkup = () => {
         return renderToStaticMarkup(
             <svg>
@@ -111,7 +113,7 @@ const CustomMapMarker = ({ establishment }) => {
                         d="M22.499 14.341h-6.048v4.045h9.503s-.261-3.783-3.455-4.045"
                         fill="#FEFEFE"
                     />
-                </g>{" "}
+                </g>
             </svg>
         );
     };
@@ -142,15 +144,37 @@ const CustomMapMarker = ({ establishment }) => {
             position={[establishment.location.lat, establishment.location.lng]}
             icon={getCustomMarkerIcon(establishment.type)}
         >
-            <Popup>
-                <a
-                    href={`https://www.google.com/maps?q=${establishment.location.lat},${establishment.location.lng}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Open in Google Map
-                </a>
-            </Popup>
+            {withTooltip ? (
+                <Tooltip closeButton={true} autoClose={false}>
+                    <div className="custom-map-marker-pop-up">
+                        <img
+                            className="custom-map-marker-image"
+                            src={establishment.thumbnail}
+                            alt={establishment.name}
+                        />
+                        <div className="custom-map-marker-establishment-name">
+                            {establishment.name}
+                        </div>
+                        {establishment.phone && (
+                            <div className="custom-map-marker-phone">
+                                <a href={`tel:${establishment.phone}`}>
+                                    {establishment.phone}
+                                </a>
+                            </div>
+                        )}
+                    </div>
+                </Tooltip>
+            ) : (
+                <Popup>
+                    <a
+                        href={`https://www.google.com/maps?q=${establishment.location.lat},${establishment.location.lng}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Open in Google Map
+                    </a>
+                </Popup>
+            )}
         </Marker>
     );
 };

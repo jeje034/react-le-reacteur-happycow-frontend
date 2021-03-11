@@ -1,0 +1,39 @@
+.custom-map-marker-pop-up {
+    min-width: 231px;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-map-marker-image {
+    height: 100px;
+    object-fit: cover;
+}
+
+.custom-map-marker-establishment-name {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: rgb(124, 78, 196);
+}
+
+.custom-map-marker-phone {
+    font-size: 12px;
+    font-weight: 500;
+}
+.custom-map-marker-phone a:link {
+    color: rgb(124, 78, 196);
+    text-decoration: none;
+}
+/* déjà visité */
+.custom-map-marker-phone a:visited {
+    color: rgb(124, 78, 196);
+    text-decoration: none;
+}
+/* au survol */
+.custom-map-marker-phone a:hover {
+    color: rgb(124, 78, 196);
+    text-decoration: underline;
+}
+/* cliqué */
+.custom-map-marker-phone a:active {
+    color: rgb(124, 78, 196);
+}

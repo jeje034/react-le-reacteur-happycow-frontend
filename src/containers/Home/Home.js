@@ -7,14 +7,15 @@ import establishments from "../../assets/establishments.json";
 
 import EstablishmentsSection from "../../components/EstablishmentsSection/EstablishmentsSection";
 
+import GetBrowserGeocoordinates from "../../functions/GetBrowserGeocoordinates";
+import GetDistanceBetweenTwoPoints from "../../functions/GetDistanceBetweenTwoPoints";
+
 //<title>Find Vegan &amp; Vegetarian Restaurants Near Me - HappyCow</title> Msgjs21
 
 //1200 and more : 4 établissements par ligne : 1152 de largeur : 4 images de 270 (* 175) + 3 marges de 24 = 1080 + 72 = 1152
 //992 -> 1199 : 3 établissements par ligne
 //768 -> 992 : 2 établissements entiers par ligne
 //0 -> 767 : 1.x établissements par ligne
-
-const useRealGpsCoordinates = false;
 
 const getBackgroundTopImage = () => {
     const testDay = new Date();
@@ -50,104 +51,21 @@ const Home = () => {
         setIsDownloadingVeganFoodNearMe,
     ] = useState(true);
 
-    // const getDistanceFromBrowserForDebug = (latitude, longitude) => {
-    //     if (
-    //         !gpsCoordinates ||
-    //         !gpsCoordinates.latitude ||
-    //         !gpsCoordinates.longitude
-    //     ) {
-    //         return gpsCoordinates.longitude;
-    //     }
-
-    //     let lat1 = gpsCoordinates.latitude;
-    //     let lon1 = gpsCoordinates.longitude;
-
-    //     //https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
-
-    //     var p = 0.017453292519943295; // Math.PI / 180
-    //     var c = Math.cos;
-    //     var a =
-    //         0.5 -
-    //         c((latitude - lat1) * p) / 2 +
-    //         (c(lat1 * p) * c(latitude * p) * (1 - c((longitude - lon1) * p))) /
-    //             2;
-
-    //     return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-    // };
-
     useEffect(() => {
         let localGpsCoordinates;
-
-        const getAndSetBrowserGeocondinates = () => {
-            let gpsCoordinatesFound = false;
-
-            if (useRealGpsCoordinates) {
-                //fonction réalisée à l'aide de https://www.pluralsight.com/guides/how-to-use-geolocation-call-in-reactjs
-                if ("geolocation" in navigator) {
-                    navigator.geolocation.getCurrentPosition(function (
-                        position
-                    ) {
-                        localGpsCoordinates = {
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude,
-                        };
-
-                        gpsCoordinatesFound = true;
-                        // console.log(
-                        //     "Gps coordinates fond:",
-                        //     `${position.coords.latitude}, ${position.coords.longitude}`
-                        // );
-                        //Lat, long mtp, proche de Jérôme : 43.6174848, 3.9124991999999996
-                    });
-                } else {
-                    console.log("Geolocation not available");
-                }
-            }
-
-            if (!gpsCoordinatesFound) {
-                //Si on n'a pas de coordonnées, on prend celles de la rue de la citée, 75 004 Paris (en face de la cathédrale Notre Dame de Paris).
-                localGpsCoordinates = {
-                    latitude: 48.85384469500249,
-                    longitude: 2.347264296359486,
-                };
-            }
-        };
-
-        const getDistanceFromBrowserCoordinates = (latitude, longitude) => {
-            if (
-                !localGpsCoordinates ||
-                !localGpsCoordinates.latitude ||
-                !localGpsCoordinates.longitude
-            ) {
-                return 0;
-            }
-
-            let lat1 = localGpsCoordinates.latitude;
-            let lon1 = localGpsCoordinates.longitude;
-
-            //https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
-
-            var p = 0.017453292519943295; // Math.PI / 180
-            var c = Math.cos;
-            var a =
-                0.5 -
-                c((latitude - lat1) * p) / 2 +
-                (c(lat1 * p) *
-                    c(latitude * p) *
-                    (1 - c((longitude - lon1) * p))) /
-                    2;
-
-            return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-        };
 
         const sortEstablishmentsByDistance = () => {
             establishments.sort((a, b) => {
                 return (
-                    getDistanceFromBrowserCoordinates(
+                    GetDistanceBetweenTwoPoints(
+                        localGpsCoordinates.latitude,
+                        localGpsCoordinates.longitude,
                         a.location.lat,
                         a.location.lng
                     ) -
-                    getDistanceFromBrowserCoordinates(
+                    GetDistanceBetweenTwoPoints(
+                        localGpsCoordinates.latitude,
+                        localGpsCoordinates.longitude,
                         b.location.lat,
                         b.location.lng
                     )
@@ -244,7 +162,7 @@ const Home = () => {
         };
 
         const fetchData = () => {
-            getAndSetBrowserGeocondinates();
+            localGpsCoordinates = GetBrowserGeocoordinates();
 
             sortEstablishmentsByDistance();
 
