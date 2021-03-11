@@ -123,14 +123,19 @@ const CustomMapMarker = ({ establishment, withDetails }) => {
         //console.log("establishmentType", establishmentType);
 
         let htmlIcon;
-        if (establishmentType && establishmentType === "vegetarian") {
-            htmlIcon = getVegetarianIconMarkup();
-        } else if (establishmentType && establishmentType === "vegan") {
-            htmlIcon = getVeganIconMarkup();
-        } else if (establishmentType && establishmentType === "B&B") {
-            htmlIcon = getBAndBIconMarkup();
+        if (establishment.selected) {
+            htmlIcon = getBAndBIconMarkup(); //msgjs21 : temporaire, pour tests
         } else {
-            htmlIcon = getVegOptionsIconMarkup();
+            if (establishmentType && establishmentType === "vegetarian") {
+                htmlIcon = getVegetarianIconMarkup();
+            } else if (establishmentType && establishmentType === "vegan") {
+                htmlIcon = getVeganIconMarkup();
+            } else if (establishmentType && establishmentType === "B&B") {
+                htmlIcon = getBAndBIconMarkup();
+            } else {
+                htmlIcon = getVegOptionsIconMarkup();
+            }
+            git;
         }
 
         return divIcon({

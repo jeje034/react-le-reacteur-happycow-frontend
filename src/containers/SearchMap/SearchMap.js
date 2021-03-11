@@ -1,5 +1,6 @@
 import "./SearchMap.scss";
 
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import CustomMapMarker from "../../components/CustomMapMarker/CustomMapMarker";
 
@@ -8,51 +9,87 @@ import GetDistanceBetweenTwoPoints from "../../functions/GetDistanceBetweenTwoPo
 import establishments from "../../assets/establishments.json";
 
 const SearchMap = () => {
-    const browserGeocoordinates = GetBrowserGeocoordinates();
+    const [establishmentsToDisplay, setEstablishmentsToDisplay] = useState([]);
+    const [browserGeocoordinates, setbrowserGeocoordinates] = useState(null);
 
-    let establishmentsToDisplay = [];
+    useEffect(() => {
+        const localBrowserGeocoordinates = GetBrowserGeocoordinates();
+        setbrowserGeocoordinates(localBrowserGeocoordinates);
 
-    const filterEstablishmentsByDistance = () => {
-        for (let i = 0; i < establishments.length; i++) {
-            const establishment = establishments[i];
+        let establishmentsToDisplayLater = [];
 
-            if (
-                GetDistanceBetweenTwoPoints(
-                    browserGeocoordinates.latitude,
-                    browserGeocoordinates.longitude,
-                    establishment.location.lat,
-                    establishment.location.lng
-                ) <= 5
-            ) {
-                establishmentsToDisplay.push(establishment);
+        const filterEstablishmentsByDistance = () => {
+            for (let i = 0; i < establishments.length; i++) {
+                const establishment = establishments[i];
+
+                if (
+                    GetDistanceBetweenTwoPoints(
+                        localBrowserGeocoordinates.latitude,
+                        localBrowserGeocoordinates.longitude,
+                        establishment.location.lat,
+                        establishment.location.lng
+                    ) <= 5
+                ) {
+                    establishment["selected"] = false;
+                    establishmentsToDisplayLater.push(establishment);
+                }
             }
-        }
+        };
+
+        const sortEstablishmentsByDistance = () => {
+            establishmentsToDisplayLater.sort((a, b) => {
+                return (
+                    GetDistanceBetweenTwoPoints(
+                        localBrowserGeocoordinates.latitude,
+                        localBrowserGeocoordinates.longitude,
+                        a.location.lat,
+                        a.location.lng
+                    ) -
+                    GetDistanceBetweenTwoPoints(
+                        localBrowserGeocoordinates.latitude,
+                        localBrowserGeocoordinates.longitude,
+                        b.location.lat,
+                        b.location.lng
+                    )
+                );
+            });
+        };
+
+        filterEstablishmentsByDistance();
+
+        sortEstablishmentsByDistance();
+
+        establishmentsToDisplayLater = establishmentsToDisplayLater.slice(
+            0,
+            15
+        );
+
+        setEstablishmentsToDisplay(establishmentsToDisplayLater);
+    }, []);
+
+    const onVenueEnter = (establishment, indice) => {
+        const newEstablishmentsToDisplay = [...establishmentsToDisplay];
+        establishmentsToDisplay[indice].selected = true;
+        setEstablishmentsToDisplay(newEstablishmentsToDisplay);
+
+        // console.log(
+        //     "enter " +
+        //         establishment.placeId +
+        //         " - " +
+        //         establishment.name +
+        //         " - " +
+        //         indice
+        // );
     };
 
-    const sortEstablishmentsByDistance = () => {
-        establishmentsToDisplay.sort((a, b) => {
-            return (
-                GetDistanceBetweenTwoPoints(
-                    browserGeocoordinates.latitude,
-                    browserGeocoordinates.longitude,
-                    a.location.lat,
-                    a.location.lng
-                ) -
-                GetDistanceBetweenTwoPoints(
-                    browserGeocoordinates.latitude,
-                    browserGeocoordinates.longitude,
-                    b.location.lat,
-                    b.location.lng
-                )
-            );
-        });
+    const onVenueLeave = (establishment, indice) => {
+        const newEstablishmentsToDisplay = [...establishmentsToDisplay];
+        establishmentsToDisplay[indice].selected = false;
+        setEstablishmentsToDisplay(newEstablishmentsToDisplay);
+        // console.log(
+        //     "enter " + establishment.placeId + " - " + establishment.name
+        // );
     };
-
-    filterEstablishmentsByDistance();
-
-    sortEstablishmentsByDistance();
-
-    establishmentsToDisplay = establishmentsToDisplay.slice(0, 10);
 
     return (
         <div className="search-map-container">
@@ -61,36 +98,54 @@ const SearchMap = () => {
                     establishmentsToDisplay.length > 0 &&
                     establishmentsToDisplay.map((establishment, indice) => {
                         return (
-                            <div key={establishment.placeId}>
+                            <div
+                                className="search-map-venue-item"
+                                key={establishment.placeId}
+                                onMouseEnter={() => {
+                                    onVenueEnter(establishment, indice);
+                                }}
+                                onMouseLeave={() => {
+                                    onVenueLeave(establishment, indice);
+                                }}
+                            >
+                                <img
+                                    className="search-map-venue-item-image"
+                                    src={establishment.thumbnail}
+                                    alt={establishment.name}
+                                />
                                 {establishment.name}
                             </div>
                         );
                     })}
             </div>
             <div className="search-map-right">
-                <MapContainer
-                    center={[
-                        browserGeocoordinates.latitude,
-                        browserGeocoordinates.longitude,
-                    ]}
-                    zoom={12}
-                    scrollWheelZoom={false}
-                    zoomControl={true}
-                >
-                    <TileLayer
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    {establishmentsToDisplay.map((establishment, indice) => {
-                        return (
-                            <CustomMapMarker
-                                key={indice}
-                                establishment={establishment}
-                                withDetails={true}
-                            ></CustomMapMarker>
-                        );
-                    })}
-                </MapContainer>
+                {browserGeocoordinates && (
+                    <MapContainer
+                        center={[
+                            browserGeocoordinates.latitude,
+                            browserGeocoordinates.longitude,
+                        ]}
+                        zoom={12}
+                        scrollWheelZoom={false}
+                        zoomControl={true}
+                    >
+                        <TileLayer
+                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        {establishmentsToDisplay.map(
+                            (establishment, indice) => {
+                                return (
+                                    <CustomMapMarker
+                                        key={indice}
+                                        establishment={establishment}
+                                        withDetails={true}
+                                    ></CustomMapMarker>
+                                );
+                            }
+                        )}
+                    </MapContainer>
+                )}
             </div>
         </div>
     );
