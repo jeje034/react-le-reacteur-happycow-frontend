@@ -135,7 +135,6 @@ const CustomMapMarker = ({ establishment, withDetails }) => {
             } else {
                 htmlIcon = getVegOptionsIconMarkup();
             }
-            git;
         }
 
         return divIcon({
