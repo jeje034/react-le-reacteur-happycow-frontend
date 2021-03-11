@@ -6,9 +6,9 @@ import { divIcon } from "leaflet";
 import { Marker, Popup } from "react-leaflet";
 
 const CustomMapMarker = ({ establishment, withDetails }) => {
-    const getVegOptionsIconMarkup = () => {
+    const getVegOptionsIconMarkup = (hasToBouce) => {
         return renderToStaticMarkup(
-            <svg>
+            <svg id={hasToBouce ? "custom-map-marker-bounce-effect" : ""}>
                 <g>
                     <path
                         d="M9.676 42.879c0-1.263 3.732-2.284 8.332-2.284 4.601 0 8.333 1.021 8.333 2.284s-3.732 2.284-8.333 2.284-8.332-1.021-8.332-2.284"
@@ -27,9 +27,9 @@ const CustomMapMarker = ({ establishment, withDetails }) => {
             </svg>
         );
     };
-    const getVegetarianIconMarkup = () => {
+    const getVegetarianIconMarkup = (hasToBouce) => {
         return renderToStaticMarkup(
-            <svg>
+            <svg id={hasToBouce ? "custom-map-marker-bounce-effect" : ""}>
                 <g xmlns="http://www.w3.org/2000/svg" fill="none">
                     <path
                         d="M9.348 42.879c0-1.263 3.732-2.284 8.332-2.284 4.601 0 8.333 1.021 8.333 2.284s-3.732 2.284-8.333 2.284-8.332-1.021-8.332-2.284"
@@ -54,9 +54,9 @@ const CustomMapMarker = ({ establishment, withDetails }) => {
     };
 
     //https://d1mvj2ulps5lli.cloudfront.net/map_marker/vegan_marker.svg
-    const getVeganIconMarkup = () => {
+    const getVeganIconMarkup = (hasToBouce) => {
         return renderToStaticMarkup(
-            <svg>
+            <svg id={hasToBouce ? "custom-map-marker-bounce-effect" : ""}>
                 <g xmlns="http://www.w3.org/2000/svg" fill="none">
                     <path
                         d="M9.676 42.879c0-1.263 3.732-2.284 8.332-2.284 4.601 0 8.333 1.021 8.333 2.284s-3.732 2.284-8.333 2.284-8.332-1.021-8.332-2.284"
@@ -81,9 +81,9 @@ const CustomMapMarker = ({ establishment, withDetails }) => {
     };
 
     //https://d1mvj2ulps5lli.cloudfront.net/map_marker/bnb_hotel_marker.svg
-    const getBAndBIconMarkup = () => {
+    const getBAndBIconMarkup = (hasToBouce) => {
         return renderToStaticMarkup(
-            <svg>
+            <svg id={hasToBouce ? "custom-map-marker-bounce-effect" : ""}>
                 <g xmlns="http://www.w3.org/2000/svg" fill="none">
                     <path
                         d="M9.839 42.879c0-1.263 3.731-2.284 8.332-2.284 4.601 0 8.333 1.021 8.333 2.284s-3.732 2.284-8.333 2.284-8.332-1.021-8.332-2.284"
@@ -123,18 +123,14 @@ const CustomMapMarker = ({ establishment, withDetails }) => {
         //console.log("establishmentType", establishmentType);
 
         let htmlIcon;
-        if (establishment.selected) {
-            htmlIcon = getBAndBIconMarkup(); //msgjs21 : temporaire, pour tests
+        if (establishmentType && establishmentType === "vegetarian") {
+            htmlIcon = getVegetarianIconMarkup(establishment.selected);
+        } else if (establishmentType && establishmentType === "vegan") {
+            htmlIcon = getVeganIconMarkup(establishment.selected);
+        } else if (establishmentType && establishmentType === "B&B") {
+            htmlIcon = getBAndBIconMarkup(establishment.selected);
         } else {
-            if (establishmentType && establishmentType === "vegetarian") {
-                htmlIcon = getVegetarianIconMarkup();
-            } else if (establishmentType && establishmentType === "vegan") {
-                htmlIcon = getVeganIconMarkup();
-            } else if (establishmentType && establishmentType === "B&B") {
-                htmlIcon = getBAndBIconMarkup();
-            } else {
-                htmlIcon = getVegOptionsIconMarkup();
-            }
+            htmlIcon = getVegOptionsIconMarkup(establishment.selected);
         }
 
         return divIcon({

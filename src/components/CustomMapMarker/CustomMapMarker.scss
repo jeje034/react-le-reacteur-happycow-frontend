@@ -52,3 +52,14 @@
 .custom-map-marker-pop-up a:active {
     color: var(--app-happycow-color);
 }
+@keyframes custom-map-marker-bounce-keyframes {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+#custom-map-marker-bounce-effect {
+    animation: custom-map-marker-bounce-keyframes 0.4s infinite alternate;
+}
