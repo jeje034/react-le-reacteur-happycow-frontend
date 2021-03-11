@@ -1,3 +1,11 @@
+.leaflet-popup-content {
+    margin: 0;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 0;
+}
+
 .custom-map-marker-pop-up {
     min-width: 231px;
     display: flex;
@@ -7,33 +15,40 @@
 .custom-map-marker-image {
     height: 100px;
     object-fit: cover;
+    margin-bottom: 5px;
+}
+
+.custom-map-marker-pop-up-text {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 .custom-map-marker-establishment-name {
     font-weight: 700;
     font-size: 1.125rem;
-    color: rgb(124, 78, 196);
+    color: var(--app-happycow-color);
 }
 
 .custom-map-marker-phone {
     font-size: 12px;
     font-weight: 500;
+    margin-bottom: 2px;
 }
-.custom-map-marker-phone a:link {
-    color: rgb(124, 78, 196);
+.custom-map-marker-pop-up a:link {
+    color: var(--app-happycow-color);
     text-decoration: none;
 }
 /* déjà visité */
-.custom-map-marker-phone a:visited {
-    color: rgb(124, 78, 196);
+.custom-map-marker-pop-up a:visited {
+    color: var(--app-happycow-color);
     text-decoration: none;
 }
 /* au survol */
-.custom-map-marker-phone a:hover {
-    color: rgb(124, 78, 196);
+.custom-map-marker-pop-up a:hover {
+    color: var(--app-happycow-color);
     text-decoration: underline;
 }
 /* cliqué */
-.custom-map-marker-phone a:active {
-    color: rgb(124, 78, 196);
+.custom-map-marker-pop-up a:active {
+    color: var(--app-happycow-color);
 }

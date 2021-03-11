@@ -54,6 +54,7 @@ Etablissement (percing) avec facebook sans site (=> facebook est présenté çà
 Resto sans facebook sans site
 
 En cliquant sur le bouton "View-all", on accède à une page de recherche des restaurants avec des critères. Pour les écrans de 992 pixels et plus, une carte est affichée.
+En cliquant sur un restaurant sur la carte, une description rapide (image, nom du restaurant, ...) s'affiche. En cliquant sur le nom du restaurant, la page du restaurant s'ouvre dans un nouvel onglet.
 
 # Getting Started with Create React App
 

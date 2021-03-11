@@ -65,7 +65,7 @@ const SearchMap = () => {
                             <CustomMapMarker
                                 key={indice}
                                 establishment={establishment}
-                                withTooltip={true}
+                                withDetails={true}
                             ></CustomMapMarker>
                         );
                     })}

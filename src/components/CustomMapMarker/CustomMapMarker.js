@@ -1,10 +1,11 @@
 import "./CustomMapMarker.scss";
 
+import { Link } from "react-router-dom";
 import { renderToStaticMarkup } from "react-dom/server";
 import { divIcon } from "leaflet";
-import { Marker, Popup, Tooltip } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 
-const CustomMapMarker = ({ establishment, withTooltip }) => {
+const CustomMapMarker = ({ establishment, withDetails }) => {
     const getVegOptionsIconMarkup = () => {
         return renderToStaticMarkup(
             <svg>
@@ -144,26 +145,34 @@ const CustomMapMarker = ({ establishment, withTooltip }) => {
             position={[establishment.location.lat, establishment.location.lng]}
             icon={getCustomMarkerIcon(establishment.type)}
         >
-            {withTooltip ? (
-                <Tooltip closeButton={true} autoClose={false}>
+            {withDetails ? (
+                <Popup closeButton={true} autoClose={false}>
                     <div className="custom-map-marker-pop-up">
                         <img
                             className="custom-map-marker-image"
                             src={establishment.thumbnail}
                             alt={establishment.name}
                         />
-                        <div className="custom-map-marker-establishment-name">
-                            {establishment.name}
+                        <div className="custom-map-marker-pop-up-text">
+                            <Link
+                                to={`/reviews/${establishment.placeId}`}
+                                target="_blank"
+                            >
+                                <div className="custom-map-marker-establishment-name">
+                                    {establishment.name}
+                                </div>
+                            </Link>
+
+                            {establishment.phone && (
+                                <div className="custom-map-marker-phone">
+                                    <a href={`tel:${establishment.phone}`}>
+                                        {establishment.phone}
+                                    </a>
+                                </div>
+                            )}
                         </div>
-                        {establishment.phone && (
-                            <div className="custom-map-marker-phone">
-                                <a href={`tel:${establishment.phone}`}>
-                                    {establishment.phone}
-                                </a>
-                            </div>
-                        )}
                     </div>
-                </Tooltip>
+                </Popup>
             ) : (
                 <Popup>
                     <a
