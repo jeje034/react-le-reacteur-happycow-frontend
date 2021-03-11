@@ -10,8 +10,27 @@ import establishments from "../../assets/establishments.json";
 const SearchMap = () => {
     const browserGeocoordinates = GetBrowserGeocoordinates();
 
+    let establishmentsToDisplay = [];
+
+    const filterEstablishmentsByDistance = () => {
+        for (let i = 0; i < establishments.length; i++) {
+            const establishment = establishments[i];
+
+            if (
+                GetDistanceBetweenTwoPoints(
+                    browserGeocoordinates.latitude,
+                    browserGeocoordinates.longitude,
+                    establishment.location.lat,
+                    establishment.location.lng
+                ) <= 5
+            ) {
+                establishmentsToDisplay.push(establishment);
+            }
+        }
+    };
+
     const sortEstablishmentsByDistance = () => {
-        establishments.sort((a, b) => {
+        establishmentsToDisplay.sort((a, b) => {
             return (
                 GetDistanceBetweenTwoPoints(
                     browserGeocoordinates.latitude,
@@ -29,22 +48,24 @@ const SearchMap = () => {
         });
     };
 
+    filterEstablishmentsByDistance();
+
     sortEstablishmentsByDistance();
 
-    const establishmentToDisplay = establishments.slice(0, 5);
+    establishmentsToDisplay = establishmentsToDisplay.slice(0, 10);
 
     return (
         <div className="search-map-container">
             <div className="search-map-left">
-                <div>Resto 1</div>
-                <div>Resto 2</div>
-                <div>Resto 3</div>
-                <div>Resto 4</div>
-                <div>Resto 5</div>
-                <div>Resto 6</div>
-                <div>Resto 7</div>
-                <div>Resto 8</div>
-                <div>Resto 9</div>
+                {establishmentsToDisplay &&
+                    establishmentsToDisplay.length > 0 &&
+                    establishmentsToDisplay.map((establishment, indice) => {
+                        return (
+                            <div key={establishment.placeId}>
+                                {establishment.name}
+                            </div>
+                        );
+                    })}
             </div>
             <div className="search-map-right">
                 <MapContainer
@@ -60,7 +81,7 @@ const SearchMap = () => {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {establishmentToDisplay.map((establishment, indice) => {
+                    {establishmentsToDisplay.map((establishment, indice) => {
                         return (
                             <CustomMapMarker
                                 key={indice}

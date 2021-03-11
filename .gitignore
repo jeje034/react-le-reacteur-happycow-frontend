@@ -4,6 +4,10 @@
 #jerome
 yarn.lock
 
+#jerome Visual Studio
+slnx.sqlite
+.vs/React-J40-HappyCow/v16/.suo
+
 # dependencies
 /node_modules
 /.pnp
@@ -25,3 +29,4 @@ yarn.lock
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
