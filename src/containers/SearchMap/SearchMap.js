@@ -9,6 +9,7 @@ import GetDistanceBetweenTwoPoints from "../../functions/GetDistanceBetweenTwoPo
 import establishments from "../../assets/establishments.json";
 import RatingInStars from "../../components/RatingInStars/RatingInStars";
 import OpenClosedIcon from "../../components/OpenClosedIcon/OpenClosedIcon";
+import DollarIcons from "../../components/DollarIcons/DollarIcons";
 
 const SearchMap = () => {
     const [establishmentsToDisplay, setEstablishmentsToDisplay] = useState([]);
@@ -129,6 +130,11 @@ const SearchMap = () => {
                                         establishmentDescription={
                                             establishment.description
                                         }
+                                    />
+                                    <div className="search-map-margin"></div>
+                                    <DollarIcons
+                                        price={establishment.price}
+                                        smallIcons={true}
                                     />
                                 </div>
                             </div>
