@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { renderToStaticMarkup } from "react-dom/server";
 import { divIcon } from "leaflet";
 import { Marker, Popup } from "react-leaflet";
+import RatingInStars from "../RatingInStars/RatingInStars";
 
 const CustomMapMarker = ({ establishment, withDetails }) => {
     const getVegOptionsIconMarkup = (hasToBouce) => {
@@ -162,6 +163,12 @@ const CustomMapMarker = ({ establishment, withDetails }) => {
                                     {establishment.name}
                                 </div>
                             </Link>
+                            <div className="custom-map-marker-rating">
+                                <RatingInStars
+                                    rating={establishment.rating}
+                                    smallStars={true}
+                                />
+                            </div>
 
                             {establishment.phone && (
                                 <div className="custom-map-marker-phone">

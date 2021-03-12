@@ -7,6 +7,7 @@ import CustomMapMarker from "../../components/CustomMapMarker/CustomMapMarker";
 import GetBrowserGeocoordinates from "../../functions/GetBrowserGeocoordinates";
 import GetDistanceBetweenTwoPoints from "../../functions/GetDistanceBetweenTwoPoints";
 import establishments from "../../assets/establishments.json";
+import RatingInStars from "../../components/RatingInStars/RatingInStars";
 
 const SearchMap = () => {
     const [establishmentsToDisplay, setEstablishmentsToDisplay] = useState([]);
@@ -113,7 +114,15 @@ const SearchMap = () => {
                                     src={establishment.thumbnail}
                                     alt={establishment.name}
                                 />
-                                {establishment.name}
+                                <div className="search-map-venue-item-name">
+                                    {establishment.name}
+                                </div>
+                                <div className="search-map-rating-in-stars">
+                                    <RatingInStars
+                                        rating={establishment.rating}
+                                        smallStars={true}
+                                    />
+                                </div>
                             </div>
                         );
                     })}

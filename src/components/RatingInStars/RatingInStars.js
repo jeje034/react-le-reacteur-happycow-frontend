@@ -1,6 +1,6 @@
 import "./RatingInStars.scss";
 
-const RatingInStars = ({ rating }) => {
+const RatingInStars = ({ rating, smallStars }) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
         if (rating - 1 >= 0) {
@@ -31,7 +31,9 @@ const RatingInStars = ({ rating }) => {
                     <i
                         key={indice}
                         className={
-                            "rating-in-stars-star " +
+                            (smallStars
+                                ? "rating-in-stars-small-star "
+                                : "rating-in-stars-star ") +
                             getFontAwesomeClasses(element)
                         }
                     ></i>

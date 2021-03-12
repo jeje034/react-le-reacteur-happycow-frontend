@@ -199,12 +199,12 @@ $bAndBColor: #1e85a2;
 .reviews-dollar-icon {
     width: 10.83px;
     height: 20px;
-    color: rgb(255, 204, 0);
+    color: var(--app-rating-stars-color);
     margin-right: 4px;
 }
 
 .reviews-dollar-icon-yellow {
-    color: rgb(255, 204, 0);
+    color: var(--app-rating-stars-color);
 }
 
 .reviews-dollar-icon-grey {

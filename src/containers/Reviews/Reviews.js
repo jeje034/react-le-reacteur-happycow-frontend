@@ -351,7 +351,6 @@ const Reviews = () => {
                                     >
                                         {establishment.pictures.map(
                                             (picture, index) => {
-                                                //
                                                 return (
                                                     <div
                                                         className="reviews-carousel-item"
