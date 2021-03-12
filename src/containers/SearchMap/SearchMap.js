@@ -8,6 +8,7 @@ import GetBrowserGeocoordinates from "../../functions/GetBrowserGeocoordinates";
 import GetDistanceBetweenTwoPoints from "../../functions/GetDistanceBetweenTwoPoints";
 import establishments from "../../assets/establishments.json";
 import RatingInStars from "../../components/RatingInStars/RatingInStars";
+import OpenClosedIcon from "../../components/OpenClosedIcon/OpenClosedIcon";
 
 const SearchMap = () => {
     const [establishmentsToDisplay, setEstablishmentsToDisplay] = useState([]);
@@ -121,6 +122,13 @@ const SearchMap = () => {
                                     <RatingInStars
                                         rating={establishment.rating}
                                         smallStars={true}
+                                    />
+                                </div>
+                                <div className="search-map-open-closed-price-distance">
+                                    <OpenClosedIcon
+                                        establishmentDescription={
+                                            establishment.description
+                                        }
                                     />
                                 </div>
                             </div>

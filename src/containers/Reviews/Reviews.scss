@@ -114,10 +114,10 @@ $bAndBColor: #1e85a2;
 }
 
 .reviews-color-open {
-    color: #2e7d32;
+    color: var(--app-open-color);
 }
 .reviews-color-closed {
-    color: #e53935;
+    color: var(--app-closed-color);
 }
 .reviews-font-14px-500 {
     font-size: 14px;

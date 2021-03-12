@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { divIcon } from "leaflet";
 import { Marker, Popup } from "react-leaflet";
 import RatingInStars from "../RatingInStars/RatingInStars";
+import OpenClosedIcon from "../OpenClosedIcon/OpenClosedIcon";
 
 const CustomMapMarker = ({ establishment, withDetails }) => {
     const getVegOptionsIconMarkup = (hasToBouce) => {
@@ -167,6 +168,13 @@ const CustomMapMarker = ({ establishment, withDetails }) => {
                                 <RatingInStars
                                     rating={establishment.rating}
                                     smallStars={true}
+                                />
+                            </div>
+                            <div className="custom-map-marker-open-closed">
+                                <OpenClosedIcon
+                                    establishmentDescription={
+                                        establishment.description
+                                    }
                                 />
                             </div>
 

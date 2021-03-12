@@ -33,6 +33,13 @@
     color: var(--app-rating-stars-color);
 }
 
+.custom-map-marker-open-closed {
+    display: flex;
+    height: 16px;
+    margin-bottom: 4px;
+    //background-color: yellow;
+}
+
 .custom-map-marker-phone {
     font-size: 12px;
     font-weight: 500;

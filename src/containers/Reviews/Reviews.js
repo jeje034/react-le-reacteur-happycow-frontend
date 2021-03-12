@@ -13,6 +13,7 @@ import GetEstablishmentTypeIcon from "../../functions/GetEstablishmentTypeIcon";
 import establishments from "../../assets/establishments.json";
 import RatingInStars from "../../components/RatingInStars/RatingInStars";
 import CustomMapMarker from "../../components/CustomMapMarker/CustomMapMarker";
+import OpenClosedIcon from "../../components/OpenClosedIcon/OpenClosedIcon";
 
 const getBannerClasses = (establishmentType) => {
     let className = "review-title-and-more";
@@ -208,29 +209,16 @@ const Reviews = () => {
                         {/*msgjs21 à mettre plus tard si l'on gère les liens <div>Europe / France / Paris</div> */}
                         <div className="reviews-hours-contact-adress">
                             <div className="reviews-hours-with-icon">
-                                <svg
-                                    className={getOpenCloseClassColor(
+                                <OpenClosedIcon
+                                    establishmentDescription={
                                         establishment.description
-                                    )}
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                        style={{
-                                            strokeLinecap: "round",
-                                            strokeLinejoin: "round",
-                                            strokeWidth: 2,
-                                        }}
-                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                    ></path>
-                                </svg>
+                                    }
+                                />
                                 <div className="reviews-flex-column">
                                     <div
                                         className={
                                             "reviews-hours-contact-adress-first-line " +
-                                            getOpenCloseClassColor(
+                                            getOpenClosedClassColor(
                                                 establishment.description
                                             )
                                         }
@@ -478,7 +466,7 @@ const Reviews = () => {
     );
 };
 
-const getOpenCloseClassColor = (establishmentDescription) => {
+const getOpenClosedClassColor = (establishmentDescription) => {
     const openingHoursInformations = GetOpeningHoursInformations(
         establishmentDescription
     );
