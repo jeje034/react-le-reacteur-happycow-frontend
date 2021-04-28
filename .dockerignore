@@ -1,0 +1,12 @@
+#https://www.bogotobogo.com/DevOps/Docker/Docker-React-App.php
+node_modules
+npm-debug.log
+build
+.dockerignore
+**/.git
+**/.DS_Store
+**/node_modules
+
+#JS
+.vs
+coverage

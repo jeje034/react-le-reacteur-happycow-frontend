@@ -6,7 +6,6 @@ const DollarIcons = ({ price, smallIcons }) => {
 
         //Comme dans le fichier JSON, on a uniquement des price à null ou "Inexpensive", on considère
         //null comme Moderate => 1 $ jaune si Inexpensive, 2 $ jaune si null.
-
         if (title === "Inexpensive") {
             className = "dollars-icon-one-icon dollar-icons-yellow";
         } else if (title === "Moderate") {
@@ -21,6 +20,10 @@ const DollarIcons = ({ price, smallIcons }) => {
                 (price && price === "Expensive"
                     ? " dollar-icons-yellow"
                     : " dollar-icons-grey");
+        }
+
+        if (smallIcons) {
+            className += " dollars-icon-one-icon-small";
         }
 
         return (

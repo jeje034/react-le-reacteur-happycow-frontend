@@ -131,11 +131,15 @@ const SearchMap = () => {
                                             establishment.description
                                         }
                                     />
-                                    <div className="search-map-margin"></div>
-                                    <DollarIcons
-                                        price={establishment.price}
-                                        smallIcons={true}
-                                    />
+                                    {establishment.type !== "B&B" && (
+                                        <div className="search-map-margin"></div>
+                                    )}
+                                    {establishment.type !== "B&B" && (
+                                        <DollarIcons
+                                            price={establishment.price}
+                                            smallIcons={true}
+                                        />
+                                    )}
                                 </div>
                             </div>
                         );
